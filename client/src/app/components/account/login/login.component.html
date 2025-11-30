@@ -1,0 +1,24 @@
+<section>
+    <div class="item-1">
+        <form>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" [formControl]="EmailCtrl" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" [formControl]="PasswordCtrl" matInput>
+            </mat-form-field>
+
+            <button (click)="login()" mat-stroked-button color="accent" [disabled]="loginFg.invalid">
+                Login
+            </button>
+        </form>
+        <!-- <p>
+            {{loggedInRes?.email}}
+            {{loggedInRes?.name}}
+        </p> -->
+
+    </div>
+</section>
