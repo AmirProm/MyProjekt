@@ -1,0 +1,94 @@
+<main>
+    @if (member && loggedInUser) {
+    <section class="top">
+        <div>
+            @if (member.photos.length === 0) {
+            <mat-error>Your album is empty. You may upload some photos.</mat-error>
+            }
+        </div>
+        <div class="gallery">
+            @for (photo of member.photos; track $index) {
+            <div class="photos">
+                <img src="{{apiUrl + photo.url_165}}" width="165" height="165" alt="{{member.userName}} photo">
+                <div class="buttons">
+                    <button (click)="setMainPhotoComp(photo.url_165)" mat-stroked-button color="primary"
+                        [disabled]="photo.isMain">Set profile
+                    </button>
+                    <button (click)="deletePhotoComp(photo.url_165, $index)" mat-mini-fab color="warn"
+                        [disabled]="photo.isMain">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            }
+
+            <div class="upload-photo-area">
+                <mat-card ng2FileDrop (fileOver)="fileOverBase($event)" (click)="fileInput.click()"
+                    [uploader]="uploader" [ngClass]="{
+                        'file-not-over': !hasBaseDropZoneOver,
+                        'file-over': hasBaseDropZoneOver
+                    }">
+                    <mat-card-header>
+                        <mat-card-title>Add Photos</mat-card-title>
+                        <mat-card-subtitle>Click or Drop photos here</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-icon>cloud_upload</mat-icon>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button type="button" mat-raised-button>Choose Photos</button>
+                        <input multiple type="file" #fileInput ng2FileSelect [uploader]="uploader" id="file">
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </section>
+    }
+
+    @if (uploader && uploader.queue && uploader.queue.length) {
+    <section class="queue">
+        <h2>Upload Queue</h2>
+        <p>Queue length: {{ uploader.queue.length }}</p>
+
+        <div class="photos-queue">
+            <div>
+                <strong>Name</strong>
+                <strong>Size</strong>
+            </div>
+            @for (item of uploader.queue; track $index) {
+            <div>
+                <p>{{ item?.file?.name }}</p>
+                @if (uploader.options.isHTML5) {
+                <p> {{ item?.file?.size / 1024 / 1024 | number:'.2' }} MB</p>
+                }
+            </div>
+            }
+        </div>
+
+        <div class="process">
+            <div>
+                Queue progress:
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+                </div>
+            </div>
+            <div class="buttons">
+                <button mat-raised-button color="primary" type="button" (click)="uploader.uploadAll()"
+                    [disabled]="!uploader.getNotUploadedItems().length">
+                    <mat-icon>upload</mat-icon>
+                    Upload all
+                </button>
+                <button mat-raised-button color="accent" type="button" (click)="uploader.cancelAll()"
+                    [disabled]="!uploader.isUploading">
+                    <mat-icon>cancel</mat-icon>
+                    Cancel all
+                </button>
+                <button mat-raised-button color="warn" type="button" (click)="uploader.clearQueue()"
+                    [disabled]="!uploader.queue.length">
+                    <mat-icon>delete</mat-icon>
+                    Remove all
+                </button>
+            </div>
+        </div>
+    </section>
+    }
+</main>
