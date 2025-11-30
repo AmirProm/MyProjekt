@@ -1,63 +1,7 @@
-.page {
-    svg {
-        width: 3.25em;
-        transform-origin: center;
-        animation: rotate4 2s linear infinite;
-    }
-
-    circle {
-        fill: none;
-        stroke: hsl(214, 97%, 59%);
-        stroke-width: 4;
-        stroke-dasharray: 1, 200;
-        stroke-dashoffset: 0;
-        // stroke-linecap: round;
-        animation: dash4 1.5s ease-in-out infinite;
-    }
-
-    @keyframes rotate4 {
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes dash4 {
-        0% {
-            stroke-dasharray: 1, 200;
-            stroke-dashoffset: 0;
-        }
-
-        50% {
-            stroke-dasharray: 90, 200;
-            stroke-dashoffset: -35px;
-        }
-
-        100% {
-            stroke-dashoffset: -125px;
-        }
-    }
-
-    .container {
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-
-        main {
-            display: flex;
-            justify-content: center;
-            flex: 1;
-            // padding: 2% 4% 6%; // left/right 4%
-
-            >* {
-                // router-outlet objects
-                width: 100%;
-            }
-        }
-    }
+.bb-spinner-text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #e5e7eb;
+  text-align: center;
+  letter-spacing: 0.04em;
 }
