@@ -1,0 +1,30 @@
+@if (memberIn) {
+<mat-card class="card">
+  <div class="card-img-wrapper">
+    <img src="member.jpg" alt="{{memberIn.userName}}">
+    <ul class="user-icons">
+      <li>
+        <button mat-mini-fab>
+          <mat-icon color="primary">person_add</mat-icon>
+        </button>
+      </li>
+      <li>
+        <button mat-mini-fab>
+          <mat-icon color="warn">favorite</mat-icon>
+        </button>
+      </li>
+      <li>
+        <button mat-mini-fab>
+          <mat-icon color="accent">mail</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <mat-card-header>
+    <div class="title">
+      <mat-icon>boy</mat-icon>
+    </div>
+    <mat-card-subtitle>{{ memberIn.city }}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+}
