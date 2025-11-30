@@ -253,31 +253,31 @@
 }
 
 /* تیک فعال */
-// .auth-checkbox input:checked + .auth-checkbox__box {
-//   border-color: #16a34a;
-//   background: #16a34a;
+.auth-checkbox input:checked+.auth-checkbox__box {
+  border-color: #16a34a;
+  background: #16a34a;
 
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     left: 4px;
-//     top: 1px;
-//     width: 6px;
-//     height: 10px;
-//     border: 2px solid #ffffff;
-//     border-top: none;
-//     border-left: none;
-//     transform: rotate(45deg);
-//   }
-// }
+  &::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 6px;
+    height: 10px;
+    border: 2px solid #ffffff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+}
 
 // /* دسکتاپ: کمی فاصله بالاتر و کارت جمع‌وجور وسط */
-// @media (min-width: 768px) {
-//   .auth-page {
-//     padding: 40px 16px;
-//   }
+@media (min-width: 768px) {
+  .auth-page {
+    padding: 40px 16px;
+  }
 
-//   .auth-card {
-//     padding: 26px 24px 24px;
-//   }
-// }
+  .auth-card {
+    padding: 26px 24px 24px;
+  }
+}

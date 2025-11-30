@@ -8,43 +8,41 @@
         <h1 class="auth-title">Create account</h1>
 
         <form class="auth-form">
-            <!-- Full name -->
             <div class="auth-field">
-                <label class="auth-label" for="reg-name">Full name</label>
-                <div class="auth-input-wrapper">
-                    <span class="auth-input-icon material-icons">person</span>
-                    <input id="reg-name" type="text" class="auth-input" placeholder="AmirAliSafay"
-                        [formControl]="UserNameCtrl">
-                </div>
-            </div>
 
-            <!-- Email -->
-            <div class="auth-field">
-                <label class="auth-label" for="reg-email">Email address</label>
-                <div class="auth-input-wrapper">
-                    <span class="auth-input-icon material-icons">mail</span>
-                     <input id="reg-email" type="email" class="auth-input" placeholder="your@email.com" [formControl]="EmailCtrl" >
-                </div>
-            </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" [formControl]="EmailCtrl" matInput>
+                </mat-form-field>
 
-            <!-- Password -->
-            <div class="auth-field">
-                <label class="auth-label" for="reg-password">Password</label>
-                <div class="auth-input-wrapper">
-                    <span class="auth-input-icon material-icons">lock</span>
-                    <input id="reg-password" type="password" class="auth-input" placeholder="••••••••" [formControl]="PasswordCtrl" />
-                </div>
-            </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input type="text" [formControl]="UserNameCtrl" matInput>
+                </mat-form-field>
 
-            <!-- Confirm password -->
-            <div class="auth-field">
-                <label class="auth-label" for="reg-confirm">Confirm password</label>
-                <div class="auth-input-wrapper">
-                    <span class="auth-input-icon material-icons">lock</span>
-                    <input id="reg-confirm" type="password" class="auth-input" placeholder="••••••••" [formControl]="ConfirmPasswordCtrl" />
-                </div>
-            </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" [formControl]="PasswordCtrl" matInput>
+                </mat-form-field>
 
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" [formControl]="ConfirmPasswordCtrl" matInput>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Date of Birth</mat-label>
+                    <input [formControl]="DateOfBirthCtrl" [min]="minDate" [max]="maxDate" matInput
+                        [matDatepicker]="dp3" placeholder="Enter your date off birth">
+                    <mat-hint>Between {{minDate.getFullYear()}} to {{maxDate.getFullYear()}}</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 touchUi disabled="false"></mat-datepicker>
+                    @if (DateOfBirthCtrl.hasError('required')) {
+                    <mat-error>This field is required.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            
             <!-- Terms checkbox -->
             <label class="auth-checkbox">
                 <input type="checkbox" />
@@ -53,16 +51,21 @@
             </label>
 
             <!-- Create account button -->
-            <button type="submit" class="auth-btn auth-btn--primary">
+            <button type="submit" class="auth-btn auth-btn--primary" (click)="register()"
+                [disabled]="registerFg.invalid">
                 <span>Create account</span>
-                <span class="material-icons auth-btn__icon">arrow_forward</span>
             </button>
 
             <!-- Already have account -->
             <p class="auth-footer-text">
                 Already have an account?
-                <a routerLink="/login" class="auth-link">Log in</a>
+                <a routerLink="/account/login" class="auth-link">Log in</a>
             </p>
+
+            @if (passwordsNotMatch) {
+            <p>Passwords don't match!</p>
+            }
+
         </form>
     </main>
 </div>

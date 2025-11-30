@@ -8,28 +8,26 @@
         <h1 class="auth-title">Log in</h1>
 
         <form class="auth-form">
-            <!-- Email -->
-            <div class="auth-field">
-                <label class="auth-label" for="login-email">Email address</label>
-                <div class="auth-input-wrapper">
-                    <span class="auth-input-icon material-icons">mail</span>
-                    <input id="login-email" class="auth-input" type="email" [formControl]="EmailCtrl" matInput>
-                </div>
-            </div>
 
-            <!-- Password -->
-            <div class="auth-field">
-                <label class="auth-label" for="login-password">Password</label>
-                <div class="auth-input-wrapper">
-                    <span class="auth-input-icon material-icons">lock</span>
-                    <input id="login-password" type="password" class="auth-input" [formControl]="PasswordCtrl" matInput>
-                </div>
-            </div>
+            <!-- Email -->
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" [formControl]="EmailCtrl" matInput>
+            </mat-form-field>
+            <!--Password-->
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" [formControl]="PasswordCtrl" matInput>
+            </mat-form-field>
 
             <!-- Login button -->
             <button type="submit" class="auth-btn auth-btn--primary" (click)="login()" [disabled]="loginFg.invalid">
                 Login
             </button>
+            <p>
+                {{loggedInRes?.email}}
+                {{loggedInRes?.userName}}
+            </p>
 
             <!-- Forgot password -->
             <button type="button" class="auth-link auth-link--center">
