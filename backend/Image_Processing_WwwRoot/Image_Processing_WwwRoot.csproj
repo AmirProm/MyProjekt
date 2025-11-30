@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- <PackageReference Include="Hallboard.SkiaSharp.ImageProcessing.WwwRoot" Version="1.1.1" /> -->
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
