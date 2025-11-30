@@ -6,7 +6,6 @@ import { RegisterUser } from '../../../models/register-user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ExampleService } from '../../../services/example.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -23,7 +22,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   accountService = inject(AccountService);
-  exampleService = inject(ExampleService);
+
   fB = inject(FormBuilder);
   subscribedRegisterUser: Subscription | undefined;
   errors: string[] | undefined;

@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { LoggedIn } from '../../../models/logged-in.model';
-import { ExampleService } from '../../../services/example.service';
 
 @Component({
   selector: 'app-login',
