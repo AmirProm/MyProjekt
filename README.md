@@ -93,3 +93,16 @@ hubUrl: "http://localhost:5000/hubs/"
 
 ## 🙌 Author
 **Amir S. – Full-stack Developer**
+Amir S. (Full-stack Developer)
+Technologies: Angular, .NET, MongoDB
+Project: BamBam Social Platform
+
+
+---
+
+📜 License
+
+MIT License
+
+
+---
