@@ -10,6 +10,7 @@ import { authLoggedInGuard } from './guards/auth-logged-in.guard';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { NoAccessComponent } from './components/errors/no-access/no-access.component';
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -31,6 +32,7 @@ export const routes: Routes = [
             { path: 'account/register', component: RegisterComponent },
         ]
     },
+    { path: 'chat', component: ChatComponent },
     { path: 'navbar', component: NavbarComponent },
     { path: 'footer', component: FooterComponent },
     { path: 'server-error', component: ServerErrorComponent },
