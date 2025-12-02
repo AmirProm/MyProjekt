@@ -1,0 +1,165 @@
+:host {
+    display: block;
+    min-height: 100vh;
+}
+
+.nf-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: radial-gradient(circle at top, #ecfdf5, #f3f4f6 45%, #e5e7eb 100%);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.nf-card {
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px 18px 18px;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.20);
+    border: 1px solid rgba(229, 231, 235, 0.95);
+    text-align: center;
+    z-index: 2;
+}
+
+.nf-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    background: #ecfdf5;
+    color: #047857;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.nf-code {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #16a34a;
+    text-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
+}
+
+.nf-title {
+    margin: 4px 0 6px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.nf-text {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.nf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+        transform 0.08s ease,
+        box-shadow 0.12s ease,
+        background-color 0.12s ease,
+        color 0.12s ease,
+        border-color 0.12s ease;
+}
+
+.nf-btn-primary {
+    background-image: linear-gradient(to right, #0f766e, #16a34a);
+    color: #ffffff;
+    box-shadow: 0 12px 26px rgba(22, 163, 74, 0.45);
+}
+
+
+.nf-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px rgba(22, 163, 74, 0.55);
+}
+
+.nf-btn-ghost {
+    background: #f9fafb;
+    color: #047857;
+    border-color: #bbf7d0;
+}
+
+.nf-btn-ghost:hover {
+    background: #ecfdf5;
+}
+
+.nf-sub {
+    margin: 4px 0 0;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.nf-bg-bubble {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(2px);
+    opacity: 0.5;
+}
+
+.nf-bg-bubble-1 {
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle at 20% 20%, #bbf7d0, #22c55e, #0f766e);
+    top: -60px;
+    right: -80px;
+}
+
+.nf-bg-bubble-2 {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 30% 30%, #bfdbfe, #1d4ed8);
+    bottom: -60px;
+    left: -70px;
+}
+
+@media (max-width: 480px) {
+    .nf-card {
+        padding: 18px 14px 14px;
+    }
+
+    .nf-code {
+        font-size: 44px;
+    }
+
+    @media (max-width: 480px) {
+        .nf-card {
+            padding: 18px 14px 14px;
+        }
+
+        .nf-code {
+            font-size: 44px;
+        }
+    }
+}
