@@ -1,0 +1,62 @@
+<div class="explore-page">
+
+    <section class="explore-header">
+        <div class="explore-header-left">
+            <h1 class="explore-title">Explore</h1>
+            <p class="explore-subtitle">
+                A calm feed of ideas, updates, and product notes from Synq.
+            </p>
+        </div>
+
+        <div class="explore-filters">
+            <button type="button" class="filter-chip" [class.active]="activeTag === 'all'" (click)="setTag('all')">
+                All
+            </button>
+
+            <button type="button" class="filter-chip" [class.active]="activeTag === 'design'"
+                (click)="setTag('design')">
+                Design
+            </button>
+
+            <button type="button" class="filter-chip" [class.active]="activeTag === 'product'"
+                (click)="setTag('product')">
+                Product
+            </button>
+
+            <button type="button" class="filter-chip" [class.active]="activeTag === 'update'"
+                (click)="setTag('update')">
+                Updates
+            </button>
+        </div>
+    </section>
+
+    <section class="explore-grid">
+        <article class="explore-card" *ngFor="let item of filteredItems">
+
+            <div class="explore-card-banner">
+                <span class="banner-pill">
+                    {{ item.tag | titlecase }}
+                </span>
+            </div>
+
+            <div class="explore-card-body">
+                <h2 class="card-title">{{ item.title }}</h2>
+                <p class="card-subtitle">{{ item.subtitle }}</p>
+            </div>
+
+            <footer class="explore-card-footer">
+                <div class="author">
+                    <div class="avatar-dot"></div>
+                    <div class="meta">
+                        <span class="author-name">{{ item.author }}</span>
+                        <span class="time">{{ item.time }}</span>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span class="likes">♥ {{ item.likes }}</span>
+                </div>
+            </footer>
+        </article>
+    </section> 
+
+ </div>
