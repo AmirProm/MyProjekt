@@ -11,6 +11,7 @@ public static class RepositoryServiceExtensions
         services.AddScoped<IAccountRepository, AccountRepository>(); // Dependency Injection
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IChatRepository, ChatRepository>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoModifySaveService, PhotoModifySaveService>();
         services.AddScoped<IPhotoService, PhotoService>();
