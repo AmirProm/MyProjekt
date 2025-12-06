@@ -4,8 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 // import { ChatComponent } from '../chat/chat.component';
-import { NgForOf } from "../../../../node_modules/@angular/common/common_module.d-NEF7UaHr";
-import { CommonModule } from '../../../../node_modules/@angular/common/common_module.d-NEF7UaHr';
+import { NgForOf } from '@angular/common';
 
 type HomeTab = 'chat' | 'explore';
 
@@ -28,7 +27,7 @@ interface ExploreItem {
   imports: [
     RouterLink,
     MatButtonModule, MatCardModule, FormsModule,
-    NgForOf , CommonModule,
+    NgForOf ,
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

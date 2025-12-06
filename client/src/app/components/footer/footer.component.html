@@ -1,19 +1,30 @@
-<footer class="footer">
-  <div class="footer__content">
-
-    <div class="footer__brand">
-      <span class="logo">bambam</span>
-      <p class="tagline">Connect • Share • Chat</p>
+<footer class="synq-footer">
+  <div class="synq-footer__inner">
+    <div class="synq-footer__brand">
+      <div class="synq-footer__logo">
+        <span class="synq-footer__logo-dot"></span>
+        <span class="synq-footer__logo-text">synq</span>
+      </div>
+      <p class="synq-footer__tagline">
+        Minimal social hub for focused chat and calm discovery.
+      </p>
     </div>
 
-    <div class="footer__links">
-      <a routerLink="/about">About</a>
-      <a routerLink="/privacy">Privacy</a>
-      <a routerLink="/terms">Terms</a>
-      <a routerLink="/contact">Contact</a>
+    <nav class="synq-footer__nav" aria-label="Footer navigation">
+      <a routerLink="/home" class="synq-footer__link">Home</a>
+      <a routerLink="/chat" class="synq-footer__link">Chat</a>
+      <a routerLink="/explore" class="synq-footer__link">Explore</a>
+      <a routerLink="/about" class="synq-footer__link">About</a>
+    </nav>
+
+    <div class="synq-footer__meta">
+      <p class="synq-footer__copy">
+        © {{ currentYear }} Synq. Built with ❤️ for clean conversations.
+      </p>
+      <div class="synq-footer__pills">
+        <span class="synq-footer__pill">Angular</span>
+        <span class="synq-footer__pill">.NET + MongoDB</span>
+      </div>
     </div>
-
-    <p class="footer__copy">© 2025 BamBam. All rights reserved.</p>
-
   </div>
 </footer>
