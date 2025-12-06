@@ -8,6 +8,7 @@ import { AccountService } from '../../services/account.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { ExploreComponent } from '../explor/explor.component';
 import { environment } from '../../../environments/environment.development';
 
 @Component({
@@ -18,7 +19,7 @@ import { environment } from '../../../environments/environment.development';
     MatButtonModule, MatToolbarModule,
     MatIconModule, MatMenuModule,
     MatDividerModule, MatListModule,
-    RouterModule
+    RouterModule , ExploreComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

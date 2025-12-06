@@ -2,13 +2,13 @@
     <section class="synq-toolbar-left">
         <a class="synq-brand" routerLink="/">
             <span class="synq-brand-dot"></span>
-            <span class="synq-brand-text">spnq</span>
+            <span class="synq-brand-text">synq</span>
         </a>
 
         <nav class="synq-nav-links">
-            <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
+            <a mat-button routerLink="/**" routerLinkActive="active">Home</a>
             <a mat-button routerLink="/chat" routerLinkActive="active">Chat</a>
-            <a mat-button routerLink="/explore" routerLinkActive="active">Explore</a>
+            <a mat-button routerLink="/explor" routerLinkActive="explore">Explore</a>
         </nav>
     </section>
 
@@ -63,8 +63,8 @@
     <mat-divider></mat-divider>
 
     <mat-nav-list class="synq-user-menu-list">
-        <a mat-list-item routerLink="/profile">
-            <mat-icon matListIcon>person</mat-icon>
+        <a mat-list-item routerLink="user/user-edit">
+            <mat-icon matListIcon>tune</mat-icon>
             <span matLine>Profile</span>
         </a>
 
