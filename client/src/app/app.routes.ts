@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { provideRouter, Routes, withHashLocation } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/account/register/register.component';
@@ -11,6 +11,7 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { NoAccessComponent } from './components/errors/no-access/no-access.component';
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ExploreComponent } from './components/explor/explor.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,6 +33,7 @@ export const routes: Routes = [
             { path: 'account/register', component: RegisterComponent },
         ]
     },
+    { path: 'explor', component: ExploreComponent },
     { path: 'chat', component: ChatComponent },
     { path: 'navbar', component: NavbarComponent },
     { path: 'footer', component: FooterComponent },
