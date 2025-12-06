@@ -62,7 +62,7 @@ public class SeedController : BaseApiController
             Email = "admin@a.com"
         };
 
-        await _userManager.CreateAsync(admin, "Aa"); // Create admin
+        await _userManager.CreateAsync(admin, "Amirali87!"); // Create admin
         await _userManager.AddToRolesAsync(admin, ["admin", "moderator"]); // Add admin to two roles of "admin" and "moderator"
 
         // Moderator
@@ -72,7 +72,7 @@ public class SeedController : BaseApiController
             UserName = "moderator"
         };
 
-        await _userManager.CreateAsync(moderator, "Aaaaaaaa/"); // Create moderator
+        await _userManager.CreateAsync(moderator, "Amirali87!"); // Create moderator
         await _userManager.AddToRoleAsync(moderator, "moderator"); // Add moderator to a role of "moderator"
 
         #endregion Create Admin and Moderator
