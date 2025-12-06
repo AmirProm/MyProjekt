@@ -1,4 +1,57 @@
-<div class="auth-page">
+<div class="auth-shell">
+    <div class="auth-card">
+        <header class="auth-header">
+            <span class="auth-logo-dot"></span>
+            <h2 class="auth-title">Welcome back</h2>
+            <p class="auth-subtitle">Sign in to continue your journey.</p>
+        </header>
+
+        <form class="auth-form" [formGroup]="loginFg" (ngSubmit)="login()">
+            <!-- Email -->
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>Email</mat-label>
+                <input type="email" [formControl]="EmailCtrl" matInput>
+                @if (EmailCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+                @else if (EmailCtrl.hasError('pattern')) {
+                <mat-error>Enter a valid email.</mat-error>
+                }
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>Password</mat-label>
+                <input type="password" [formControl]="PasswordCtrl" matInput>
+                @if (PasswordCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+                @else if (PasswordCtrl.errors && PasswordCtrl.hasError('minlength')) {
+                <mat-error>
+                    It's too short. Min: {{PasswordCtrl.errors['minlength'].requiredLength}} characters.
+                    You've typed {{PasswordCtrl.errors['minlength'].actualLength}}.
+                </mat-error>
+                }
+                @else if(PasswordCtrl.errors && PasswordCtrl.hasError('maxlength')) {
+                <mat-error>It's too long. Max: {{PasswordCtrl.errors['maxlength'].requiredLength}}
+                    characters.</mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="loginFg.invalid">
+                Log in
+            </button>
+
+            <p class="auth-switch">
+                Don’t have an account?
+                <a routerLink="/account/register">Create one</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+
+<!-- <div class="auth-page">
     <div class="auth-header">
         <div class="auth-logo">bambam</div>
         <p class="auth-subtitle">Professional social platform</p>
@@ -9,18 +62,18 @@
 
         <form class="auth-form">
 
-            <!-- Email -->
+       
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input type="email" [formControl]="EmailCtrl" matInput>
             </mat-form-field>
-            <!--Password-->
+
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input type="password" [formControl]="PasswordCtrl" matInput>
             </mat-form-field>
 
-            <!-- Login button -->
+           
             <button type="submit" class="auth-btn auth-btn--primary" (click)="login()" [disabled]="loginFg.invalid">
                 Login
             </button>
@@ -28,27 +81,24 @@
                 {{loggedInRes?.email}}
                 {{loggedInRes?.userName}}
             </p>
-
-            <!-- Forgot password -->
             <button type="button" class="auth-link auth-link--center">
                 Forgot your password?
             </button>
 
-            <!-- Divider -->
+            
             <div class="auth-divider">
                 <span></span>
                 <span>or</span>
                 <span></span>
             </div>
 
-            <!-- Sign up link -->
             <p class="auth-footer-text">
                 Don’t have an account?
                 <a routerLink="/account/register" class="auth-link">Sign up</a>
             </p>
         </form>
     </main>
-</div>
+</div> -->
 
 
 

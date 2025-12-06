@@ -1,4 +1,124 @@
-<div class="auth-page">
+<div class="auth-shell">
+    <div class="auth-card">
+        <header class="auth-header">
+            <span class="auth-logo-dot"></span>
+            <h2 class="auth-title">Create account</h2>
+            <p class="auth-subtitle">Start syncing your world today.</p>
+        </header>
+
+        <form class="auth-form" [formGroup]="registerFg" (ngSubmit)="register()">
+            <!-- Gender -->
+            <!-- <div class="auth-field auth-field-gender">
+                <label class="auth-label">I am a</label>
+                <div class="auth-gender-group">
+                    <button type="button" class="auth-gender-chip" [class.active]="GenderCtrl.value === 'female'"
+                        (click)="GenderCtrl.setValue('female')">
+                        Female
+                    </button>
+                    <button type="button" class="auth-gender-chip" [class.active]="GenderCtrl.value === 'male'"
+                        (click)="GenderCtrl.setValue('male')">
+                        Male
+                    </button>
+                    <button type="button" class="auth-gender-chip" [class.active]="GenderCtrl.value === 'other'"
+                        (click)="GenderCtrl.setValue('other')">
+                        Other
+                    </button>
+                </div>
+                <mat-error *ngIf="GenderCtrl.touched && GenderCtrl.hasError('required')">
+                    Please select your gender.
+                </mat-error>
+            </div> -->
+
+            <!-- Email -->
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>Email address</mat-label>
+                <input matInput type="email" [formControl]="EmailCtrl" placeholder="you@example.com" />
+                @if (EmailCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+                @else if (EmailCtrl.hasError('pattern')) {
+                <mat-error>Enter a valid email.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>UserName</mat-label>
+                <input matInput type="text" [formControl]="UserNameCtrl" placeholder="synq" />
+                @if (UserNameCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+                @else if (UserNameCtrl.hasError("maxlength")) {
+                <mat-error>Min 30 characters</mat-error>
+                }
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" [formControl]="PasswordCtrl" placeholder="••••••••" />
+                <mat-hint>Between 1 to 30 characters.</mat-hint>
+                @if (PasswordCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+                @else if (PasswordCtrl.errors && PasswordCtrl.hasError('minlength')) {
+                <mat-error>It's too short. Min: 8 is required.</mat-error>
+                }
+                @else if(PasswordCtrl.errors && PasswordCtrl.hasError('maxlength')) {
+                <mat-error>It's too long. Max: 20 characters.</mat-error>
+                }
+            </mat-form-field>
+
+            <!-- Confirm Password -->
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>Confirm password</mat-label>
+                <input matInput type="password" [formControl]="ConfirmPasswordCtrl" placeholder="••••••••" />
+                @if (ConfirmPasswordCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+                @else if (ConfirmPasswordCtrl.errors && ConfirmPasswordCtrl.hasError('minlength')) {
+                <mat-error>It's too short. Min: {{ConfirmPasswordCtrl.errors['minlength'].requiredLength}} is
+                    required.</mat-error>
+                }
+                @else if(ConfirmPasswordCtrl.errors && ConfirmPasswordCtrl.hasError('maxlength')) {
+                <mat-error>It's too long. Max: {{ConfirmPasswordCtrl.errors['maxlength'].requiredLength}}
+                    characters.</mat-error>
+                }
+            </mat-form-field>
+
+            <!-- Date of birth -->
+            <mat-form-field appearance="outline" class="auth-field">
+                <mat-label>Date of birth</mat-label>
+                <input [formControl]="DateOfBirthCtrl" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="dp3"
+                    placeholder="Enter your date of birth">
+                <mat-hint>Between {{minDate.getFullYear()}} to {{maxDate.getFullYear()}}</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+                <mat-datepicker #dp3 touchUi disabled="false"></mat-datepicker>
+                @if (DateOfBirthCtrl.hasError('required')) {
+                <mat-error>This field is required.</mat-error>
+                }
+            </mat-form-field>
+
+            <button (click)="register()"  mat-flat-button color="parimary"
+                [disabled]="registerFg.invalid">
+                Sign up
+            </button>
+
+            @if (passwordsNotMatch) {
+            <p>Passwords don't match!</p>
+            }
+
+            <p class="auth-switch">
+                Already have an account?
+                <a routerLink="/account/login">Log in</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="auth-page">
     <div class="auth-header">
         <div class="auth-logo">bambam</div>
         <p class="auth-subtitle">Join the community</p>
@@ -43,20 +163,20 @@
                 </mat-form-field>
             </div>
             
-            <!-- Terms checkbox -->
+            
             <label class="auth-checkbox">
                 <input type="checkbox" />
                 <span class="auth-checkbox__box"></span>
                 <span>I agree to the <a href="#" class="auth-link">Terms of Service</a></span>
             </label>
 
-            <!-- Create account button -->
+       
             <button type="submit" class="auth-btn auth-btn--primary" (click)="register()"
                 [disabled]="registerFg.invalid">
                 <span>Create account</span>
             </button>
 
-            <!-- Already have account -->
+          
             <p class="auth-footer-text">
                 Already have an account?
                 <a routerLink="/account/login" class="auth-link">Log in</a>
@@ -68,7 +188,7 @@
 
         </form>
     </main>
-</div>
+</div> -->
 
 <!-- <section> -->
 <!-- Signal basic 
