@@ -1,5 +1,5 @@
 
-# BamBam – Full Application README (Production Version)
+# SynQ/Synq – Full Application README (Production Version)
 
 ## 🌿 Overview
 BamBam یک شبکه اجتماعی کامل است که امکانات پیام‌رسان Real-time و اکسپلور مدیا را در یک تجربه‌ی سریع و مینیمال ترکیب می‌کند.  
