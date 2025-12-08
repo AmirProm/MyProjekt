@@ -1,0 +1,156 @@
+
+<div class="user-settings">
+
+  <header class="settings-header">
+    <div class="titles">
+      <p class="eyebrow">SYNQ · SETTINGS</p>
+      <h1>Account & preferences</h1>
+      <p class="subtitle">
+        Adjust how you look and feel across Synq. This view is UI-only for now; later you can connect it to your APIs.
+      </p>
+    </div>
+
+    <div class="user-pill">
+      <div class="avatar">
+        {{ avatarInitial }}
+      </div>
+      <div class="info">
+        <span class="name">{{ settings.displayName }}</span>
+        <span class="username">@{{ settings.userName }}</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="settings-main">
+    <div class="block">
+      <h2>Profile</h2>
+      <p class="block-sub">These details are visible to other people in Synq.</p>
+
+      <div class="field">
+        <label>Display name</label>
+        <input
+          type="text"
+          [(ngModel)]="settings.displayName"
+          placeholder="Your name"
+        />
+      </div>
+
+      <div class="field">
+        <label>Status note</label>
+        <input
+          type="text"
+          [(ngModel)]="settings.statusNote"
+          placeholder="e.g. Focus mode 🔕"
+        />
+        <p class="helper">
+          Short line shown under your name in chat.
+        </p>
+      </div>
+
+      <div class="field">
+        <label>Bio</label>
+        <textarea
+          rows="3"
+          [(ngModel)]="settings.bio"
+          placeholder="Tell people a bit about you..."
+        ></textarea>
+      </div>
+
+      <div class="field read-only">
+        <label>Username</label>
+        <div class="readonly-box">@{{ settings.userName }}</div>
+      </div>
+
+      <div class="field read-only">
+        <label>Email</label>
+        <div class="readonly-box">{{ settings.email }}</div>
+        <p class="helper">
+          Email changes are handled separately for security.
+        </p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Preferences</h2>
+      <p class="block-sub">How Synq behaves and looks just for you.</p>
+
+      <div class="field">
+        <label>Language</label>
+        <select [(ngModel)]="settings.language">
+          @for (lang of languages; track lang.code) {
+            <option [ngValue]="lang.code">{{ lang.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <p class="toggle-label">Allow direct messages</p>
+          <p class="toggle-sub">People can start a chat with you.</p>
+        </div>
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="settings.allowDirectMessages"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <p class="toggle-label">Show online status</p>
+          <p class="toggle-sub">Let others know when you’re active.</p>
+        </div>
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="settings.showOnlineStatus"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <p class="toggle-label">Dark mode</p>
+          <p class="toggle-sub">Use a darker theme for low light.</p>
+        </div>
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="settings.darkMode"
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button
+          class="save-btn"
+          (click)="saveSettings()"
+          [disabled]="isSaving"
+        >
+          {{ isSaving ? 'Saving…' : 'Save changes' }}
+        </button>
+
+        @if (saveMessage) {
+          <p class="save-message">
+            {{ saveMessage }}
+          </p>
+        }
+      </div>
+
+      <div class="danger-zone">
+        <p class="danger-title">Danger zone</p>
+        <p class="danger-sub">
+          Disabling or deleting your account will be implemented on the backend side.
+          This is only a placeholder section.
+        </p>
+        <button class="danger-btn" disabled>
+          Disable account (coming soon)
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
