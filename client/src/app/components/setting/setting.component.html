@@ -16,7 +16,7 @@
             </div>
             <div class="info">
                 <span class="name">{{ settings.displayName }}</span>
-                <span class="username">{{ settings.userName }}</span>
+                <span class="username">{{"@" + settings.userName }}</span>
             </div>
         </div>
     </header>
@@ -46,7 +46,7 @@
 
             <div class="field read-only">
                 <label>Username</label>
-                <div class="readonly-box">{{ settings.userName }}</div>
+                <div class="readonly-box">{{"@" + settings.userName }}</div>
             </div>
 
             <div class="field read-only">
