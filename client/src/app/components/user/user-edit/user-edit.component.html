@@ -1,10 +1,189 @@
-<div class="container">
+<div class="profile-edit-page">
+  @if (member) {
+  <section class="profile-edit-shell">
+    <!-- Top header strip -->
+    <header class="profile-header">
+      <div class="profile-header-left">
+        <div class="avatar-ring">
+          @for (photo of member.photos; track $index) {
+          @if (photo.isMain) {
+          <img [src]="apiUrl + photo.url_165" alt="Photo of {{ member.userName }}" />
+          }
+          }
+          @if (member.photos.length === 0) {
+          <div class="avatar-fallback">
+            {{ (member.userName || '?').charAt(0) | uppercase }}
+          </div>
+          }
+        </div>
+        <div class="profile-header-text">
+          <h1 class="profile-name">{{ member.userName }}</h1>
+          <p class="profile-sub">
+            {{ member.city | titlecase }}, {{ member.country | titlecase }}
+          </p>
+          <p class="profile-meta">
+            Last active · {{ member.lastActive | date }}
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-header-right">
+        <button type="submit" mat-stroked-button color="primary" class="ghost-button" (click)="updateUser()"
+          [disabled]="userEditFg.invalid || userEditFg.pristine">
+          Save changes
+        </button>
+      </div>
+    </header>
+
+    <!-- Main content: left summary, right tabs -->
+    <main class="profile-main">
+      <!-- Left summary card -->
+      <section class="summary-card">
+        <h2 class="summary-title">Snapshot</h2>
+        <ul class="summary-list">
+          <li class="summary-item">
+            <span class="label">Location</span>
+            <span class="value">
+              {{ member.city | titlecase }}, {{ member.country | titlecase }}
+            </span>
+          </li>
+          <li class="summary-item">
+            <span class="label">Age</span>
+            <span class="value">{{member.age}}</span>
+          </li>
+          <li class="summary-item">
+            <span class="label">Photos</span>
+            <span class="value">{{ member.photos.length }}</span>
+          </li>
+        </ul>
+
+        <div class="hint-block">
+          <p class="hint-title">Tip</p>
+          <p class="hint-text">
+            A clear profile photo and a short introduction make it easier for
+            people to recognize you across Synq.
+          </p>
+        </div>
+      </section>
+
+      <!-- Right edit panel -->
+      <section class="edit-panel">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="edit-tabs">
+          <mat-tab label="About">
+            <div class="tab-body">
+              <form class="about-form">
+
+                <mat-form-field appearance="outline" class="field-full">
+                  <mat-label>Introduction</mat-label>
+                  <textarea cdkTextareaAutosize [formControl]="IntroductionCtrl" [value]="member.introduction"
+                    placeholder="Say something about yourself" matInput>
+{{ IntroductionCtrl.value }}
+                    </textarea>
+                  <mat-hint>
+                    {{ IntroductionCtrl.value?.length }} of {{ maxTextAreaChars }}
+                  </mat-hint>
+                  @if (IntroductionCtrl.hasError('maxlength')) {
+                  <mat-error>
+                    Maximum of {{ maxTextAreaChars }} characters is reached.
+                  </mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field-full">
+                  <mat-label>Looking for</mat-label>
+                  <textarea cdkTextareaAutosize [formControl]="LookingForCtrl"
+                    placeholder="Enter what you're looking for" matInput>
+{{ member.lookingFor }}
+                    </textarea>
+                  <mat-hint>
+                    {{ LookingForCtrl.value?.length }} of {{ maxTextAreaChars }}
+                  </mat-hint>
+                  @if (LookingForCtrl.hasError('maxlength')) {
+                  <mat-error>
+                    Maximum of {{ maxTextAreaChars }} characters is reached.
+                  </mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field-full">
+                  <mat-label>Interests</mat-label>
+                  <textarea cdkTextareaAutosize [formControl]="InterestsCtrl" placeholder="Enter your interests"
+                    matInput>
+{{ member.interests }}
+                    </textarea>
+                  <mat-hint>
+                    {{ InterestsCtrl.value?.length }} of {{ maxTextAreaChars }}
+                  </mat-hint>
+                  @if (InterestsCtrl.hasError('maxlength')) {
+                  <mat-error>
+                    Maximum of {{ maxTextAreaChars }} characters is reached.
+                  </mat-error>
+                  }
+                </mat-form-field>
+
+                <div class="field-grid">
+                  <mat-form-field appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input [formControl]="CityCtrl" placeholder="Enter your city" matInput required />
+                    <mat-hint>
+                      Minimum of {{ minInputChars }} characters is required.
+                    </mat-hint>
+                    @if (CityCtrl.hasError('required')) {
+                    <mat-error>This field is required</mat-error>
+                    }
+                    @else if (CityCtrl.hasError('minlength')) {
+                    <mat-error>
+                      Minimum of {{ minInputChars }} characters is required.
+                    </mat-error>
+                    }
+                    @else if (CityCtrl.hasError('maxlength')) {
+                    <mat-error>
+                      Maximum of {{ maxInputChars }} characters is reached.
+                    </mat-error>
+                    }
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input [formControl]="CountryCtrl" placeholder="Enter your country" matInput required />
+                    <mat-hint>
+                      Minimum of {{ minInputChars }} characters is required.
+                    </mat-hint>
+                    @if (CountryCtrl.hasError('required')) {
+                    <mat-error>This field is required</mat-error>
+                    }
+                    @else if (CountryCtrl.hasError('minlength')) {
+                    <mat-error>
+                      Minimum of {{ minInputChars }} characters is required.
+                    </mat-error>
+                    }
+                    @else if (CountryCtrl.hasError('maxlength')) {
+                    <mat-error>
+                      Maximum of {{ maxInputChars }} characters is reached.
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </form>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Photos">
+            <div class="tab-body tab-body--photos">
+              <app-photo-editor [memberInput]="member"></app-photo-editor>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </section>
+    </main>
+  </section>
+  }
+</div>
+
+<!-- <div class="container">
   <section class="head">
     <h1 class="title">Your Profile</h1>
-    <!-- <mat-card class="warning">
-
-    </mat-card> -->
-  </section>
+    </section>
   @if (member) {
   <div class="content">
     <section class="user-card">
@@ -129,4 +308,4 @@
     </mat-tab-group>
   </div>
   }
-</div>
+</div> -->
