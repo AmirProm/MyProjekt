@@ -18,13 +18,12 @@ interface UserSettings {
 }
 
 @Component({
-  selector: 'app-user-settings',
-  standalone: true,
+  selector: 'app-setting',
   imports: [CommonModule, FormsModule],
-  templateUrl: 'setting.component.html',
-  styleUrl: 'setting.component.scss',
+  templateUrl: './setting.component.html',
+  styleUrl: './setting.component.scss'
 })
-export class UserSettingsComponent {
+export class SettingComponent {
   readonly languages: { code: LanguageCode; label: string }[] = [
     { code: 'en', label: 'English' },
     { code: 'fa', label: 'فارسی' },
@@ -62,4 +61,6 @@ export class UserSettingsComponent {
       console.log('Synq user settings (mock save):', this.settings);
     }, 500);
   }
+
+
 }
