@@ -12,7 +12,7 @@ import { NoAccessComponent } from './components/errors/no-access/no-access.compo
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
 import { Chat } from './components/chat/chat.component';
 import { ExploreComponent } from './components/explor/explor.component';
-
+import { SettingComponent } from './components/setting/setting.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     {
@@ -33,6 +33,7 @@ export const routes: Routes = [
             { path: 'account/register', component: RegisterComponent },
         ]
     },
+    { path: 'settings', component: SettingComponent },
     { path: 'explor', component: ExploreComponent },
     { path: 'chat', component: Chat },
     { path: 'navbar', component: NavbarComponent },
