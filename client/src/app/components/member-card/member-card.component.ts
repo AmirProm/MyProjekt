@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Member } from '../../../models/member.model';
+import { Member } from '../../models/member.model';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-member-card',
@@ -15,6 +15,6 @@ import { environment } from '../../../../environments/environment.development';
   styleUrl: './member-card.component.scss'
 })
 export class MemberCardComponent {
-@Input('memberInput') memberIn: Member | undefined; // memberInput is a contract
-apiUrl = environment.apiUrl;
+  @Input('memberInput') memberIn: Member | undefined; // memberInput is a contract
+  apiUrl = environment.apiUrl;
 }
