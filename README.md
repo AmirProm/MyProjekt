@@ -3,7 +3,7 @@
 :globe_with_meridians: Synq — Real-time Social Platform
 
 A clean and modern social platform featuring real-time chat, explore feed, user profiles, and a Google-style minimal UI.
-Built with Angular 17, ASP.NET Core, and SignalR.
+Built with Angular 19, ASP.NET Core, Microsoft identity, and SignalR.
 
 
 ---
