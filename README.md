@@ -1,114 +1,152 @@
+---
 
-# SynQ/Synq – Full Application README (Production Version)
+:globe_with_meridians: Synq — Real-time Social Platform
 
-## 🌿 Overview
-BamBam یک شبکه اجتماعی کامل است که امکانات پیام‌رسان Real-time و اکسپلور مدیا را در یک تجربه‌ی سریع و مینیمال ترکیب می‌کند.  
-این نسخه، نسخه اصلی پروژه است: Angular + .NET 9 + MongoDB + SignalR.
+A clean and modern social platform featuring real-time chat, explore feed, user profiles, and a Google-style minimal UI.
+Built with Angular 17, ASP.NET Core, and SignalR.
+
 
 ---
 
-## ⭐ Features
-### 🔐 Authentication (Identity + JWT)
-- Register / Login
-- Refresh Token
-- Role-based Access
-- ذخیره نشست کاربر
+:sparkles: Features
 
-### 💬 Real-Time Chat (SignalR)
-- ارتباط لحظه‌ای
-- وضعیت آنلاین
-- ذخیره پیام‌ها در MongoDB
-- Bubble UI
+:fire: Real-time Chat
 
-### 📸 Explore
-- آپلود عکس
-- گرید 3×3
-- Like / Unlike
-- نمایش پست‌ها
+WebSocket-based messaging
 
-### 👤 Profile
-- اطلاعات کاربر
-- ویرایش پروفایل
-- گالری پست‌ها
+Typing indicator (coming soon)
+
+Online/offline status (coming soon)
+
+
+🖼 Explore Feed
+
+Users can post text + images
+
+Sorted by newest / future “most liked”
+
+Designed for minimal distraction
+
+
+:bust_in_silhouette: User Profiles
+
+Profile photo upload
+
+Edit bio, interests, location
+
+Clean & simple UI
+
+
+🛠 Modern UI/UX
+
+Inspired by Google ID design
+
+Minimal, soft colors
+
+Responsive layout for all devices
+
+
 
 ---
 
-## 🧱 Tech Stack
-**Frontend:** Angular 19/20 + SCSS + Angular Material  
-**Backend:** .NET 9 Web API + Identity + JWT + SignalR  
-**Database:** MongoDB
+🖼 Screenshots
+
+(Add your real screenshots later in /screenshots folder)
+
+Home	Explore	Chat
+
+		
+
+
 
 ---
 
-## ⚙ Backend Setup
-```
-cd api
+🧩 Tech Stack
+
+Frontend
+
+Angular 17
+
+TypeScript
+
+SCSS
+
+Angular Material / Custom Components
+
+
+Backend
+
+ASP.NET Core 8
+
+SignalR
+
+Entity Framework Core
+
+SQL Server / PostgreSQL
+
+
+
+---
+
+:zap: Getting Started
+
+:pushpin: Backend
+
+cd API
 dotnet restore
 dotnet run
-```
 
-Modify `appsettings.json`:
-```
-"Mongo": "mongodb://localhost:27017/bambamdb"
-```
+:pushpin: Frontend
 
----
-
-## 💻 Frontend Setup
-```
 cd client
 npm install
-ng serve -o
-```
-
-Modify `environment.ts`:
-```
-apiUrl: "http://localhost:5000/api",
-hubUrl: "http://localhost:5000/hubs/"
-```
-
----
-
-## 📁 Data Models
-### User
-- id, displayName, email, passwordHash, profilePhotoUrl, createdAt
-
-### Message
-- id, senderId, receiverId, message, sentAt, seen
-
-### Media
-- id, userId, imageUrl, caption, tags[], postedAt, likes[]
-
----
-
-## 🛣 Roadmap
-- V2: Angular Routing (Done)
-- V3: Auth + JWT
-- V4: Media Upload
-- V5: Real-time Chat (SignalR)
-- V6: Notifications
-- V7: Groups
-
----
-
-## 🙌 Author
-**Amir S. – Full-stack Developer**
-Amir S. (Full-stack Developer)
-Technologies: Angular, .NET, MongoDB
-Project: BamBam Social Platform
+ng serve --open
 
 
 ---
 
-📜 License
-MIT License
+🧱 Project Structure
 
-Copyright (c) 2025 Amir
+/API                → ASP.NET Core backend  
+/client             → Angular frontend  
+/screenshots        → UI preview images  
+README.md           → Project documentation
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software.
-...
+
+---
+:date: Roadmap
+
+Next Versions
+
+[ ] Post likes
+
+[ ] Comments
+
+[ ] Notifications
+
+[ ] Group chats
+
+[ ] Direct messages
+
+[ ] Following system
+
+[ ] Dark mode
+
+
+
+---
+
+🤝 Contributing
+
+Pull requests are welcome!
+If you’d like to submit an improvement or report an issue, feel free to open one.
+
+
+---
+
+:page_facing_up: License
+
+This project is licensed under the MIT License.
+
 
 ---
