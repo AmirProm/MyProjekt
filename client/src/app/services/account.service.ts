@@ -26,7 +26,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('members/member-list');
+          this.router.navigateByUrl('dashboard');
 
           return res;
         }
@@ -55,7 +55,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('members/member-list');
+          this.router.navigateByUrl('dashboard');
 
           return res;
         }
