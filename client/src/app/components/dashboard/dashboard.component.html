@@ -1,0 +1,205 @@
+<main class="dash">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="heroCard">
+
+      <div class="meRow">
+        <div class="avatarWrap">
+          @if (avatarUrlSig(); as av) {
+            <img class="avatar" [src]="av" alt="Profile photo" (error)="onImgError($event)" />
+          } @else {
+            <div class="avatar fallback">{{ displayNameSig()[0] | titlecase }}</div>
+          }
+          <span class="statusDot" title="Online"></span>
+        </div>
+
+        <div class="meMeta">
+          <h1 class="title">
+            Welcome back, <span class="accent">{{ displayNameSig() }}</span>
+          </h1>
+
+          <p class="sub">
+            <span class="muted">{{ emailSig() }}</span>
+            <span class="dot">•</span>
+
+            @if (stateSig() === 'loading') { <span class="muted">Loading profile…</span> }
+            @if (stateSig() === 'error') { <span class="warn">Couldn’t load profile</span> }
+            @if (stateSig() === 'ready') { <span class="muted">Ready</span> }
+          </p>
+
+          @if (memberSig(); as m) {
+            <div class="pillRow">
+              <span class="pill">{{ m.city | titlecase }}, {{ m.country | titlecase }}</span>
+              <span class="pill">{{ m.age }} yrs</span>
+              <span class="pill">Last active: {{ m.lastActive | date:'mediumDate' }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" type="button" (click)="goChat()">
+            <span class="i">💬</span><span>Chat</span>
+          </button>
+
+          <button class="btn" type="button" (click)="goExplore()">
+            <span class="i">🧭</span><span>Explore</span>
+          </button>
+
+          <button class="btn" type="button" (click)="goEditProfile()">
+            <span class="i">⚙️</span><span>Edit</span>
+          </button>
+
+          <button class="btn danger" type="button" (click)="logout()">
+            <span class="i">↩</span><span>Log out</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="kpiRow">
+        <div class="kpi">
+          <div class="kpiTop"><span>Posts</span><span class="kpiIcon">▦</span></div>
+          <div class="kpiVal">{{ kpiSig().posts }}</div>
+          <div class="kpiHint">Coming soon</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpiTop"><span>Followers</span><span class="kpiIcon">👥</span></div>
+          <div class="kpiVal">{{ kpiSig().followers }}</div>
+          <div class="kpiHint">Coming soon</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpiTop"><span>Following</span><span class="kpiIcon">➕</span></div>
+          <div class="kpiVal">{{ kpiSig().following }}</div>
+          <div class="kpiHint">Coming soon</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpiTop"><span>Chats</span><span class="kpiIcon">💭</span></div>
+          <div class="kpiVal">{{ kpiSig().chats }}</div>
+          <div class="kpiHint">Coming soon</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section class="grid">
+
+    <!-- PROFILE -->
+    <section class="panel">
+      <div class="panelHead">
+        <h2>Profile completeness</h2>
+        <button class="linkBtn" type="button" (click)="goEditProfile()">Improve</button>
+      </div>
+
+      <div class="progressRow">
+        <div class="bar"><div class="fill" [style.width.%]="profileScoreSig()"></div></div>
+        <div class="score">{{ profileScoreSig() }}%</div>
+      </div>
+
+      <div class="steps">
+        @for (s of nextStepsSig(); track $index) {
+          <div class="step" [class.done]="s.done">
+            <span class="stepIcon">{{ s.done ? '✅' : '⭕' }}</span>
+            <span class="stepText">{{ s.label }}</span>
+            @if (!s.done) {
+              <button class="miniBtn" type="button" (click)="s.action === 'photos' ? goPhotos() : goEditProfile()">Fix</button>
+            }
+          </div>
+        }
+      </div>
+
+      @if (memberSig(); as m) {
+        <div class="bio">
+          <div class="bioItem">
+            <div class="bioLabel">Introduction</div>
+            <div class="bioText">{{ m.introduction || '—' }}</div>
+          </div>
+          <div class="bioItem">
+            <div class="bioLabel">Looking for</div>
+            <div class="bioText">{{ m.lookingFor || '—' }}</div>
+          </div>
+          <div class="bioItem">
+            <div class="bioLabel">Interests</div>
+            <div class="bioText">{{ m.interests || '—' }}</div>
+          </div>
+        </div>
+      }
+    </section>
+
+    <!-- MEMBERS -->
+    <section class="panel">
+      <div class="panelHead">
+        <h2>Members</h2>
+
+        <div class="searchWrap">
+          <input
+            class="search"
+            type="text"
+            placeholder="Search username (server)…"
+            [value]="querySig()"
+            (input)="onQuery(($any($event.target)).value)"
+          />
+          <button class="btnSm" type="button" (click)="searchNow()">Search</button>
+          <button class="btnSm ghost" type="button" (click)="querySig.set(''); clearSearch()">Clear</button>
+        </div>
+      </div>
+
+      <div class="hintRow">
+        @if (isSearchModeSig()) {
+          @if (searchStateSig() === 'loading') { <span class="muted">Searching…</span> }
+          @if (searchStateSig() === 'notfound') { <span class="warn">No user found.</span> }
+          @if (searchStateSig() === 'error') { <span class="warn">Search failed.</span> }
+          @if (searchStateSig() === 'done') { <span class="muted">Result</span> }
+        } @else {
+          <span class="muted">Showing real members from database</span>
+        }
+      </div>
+
+      <div class="members">
+        @for (m of membersSig(); track m.userName) {
+          <article class="card" (click)="openMember(m)">
+            <div class="cardTop">
+              @if (memberAvatar(m); as img) {
+                <img class="mAvatar" [src]="img" alt="Member avatar" (error)="onImgError($event)" />
+              } @else {
+                <div class="mAvatar fallback">{{ m.userName[0] | titlecase }}</div>
+              }
+
+              <div class="mMeta">
+                <div class="mName">{{ m.userName }}</div>
+                <div class="mSub">{{ m.city | titlecase }} {{ m.country | titlecase }} • {{ m.age }}</div>
+              </div>
+            </div>
+
+            <div class="mBio">{{ m.introduction || '—' }}</div>
+
+            <div class="cardActions">
+              <button class="btnSm" type="button" (click)="$event.stopPropagation(); followSoon()">Follow</button>
+              <button class="btnSm ghost" type="button" (click)="$event.stopPropagation(); goChat()">Message</button>
+            </div>
+          </article>
+        }
+
+        @if (membersSig().length === 0) {
+          <div class="empty">
+            <div>No members to show.</div>
+            <button class="btnSm" type="button" (click)="clearSearch()">Back</button>
+          </div>
+        }
+      </div>
+
+      @if (!isSearchModeSig() && paginationInfoSig(); as p) {
+        <div class="pager">
+          <button class="btnSm ghost" type="button" (click)="prevPage()" [disabled]="p.currentPage <= 1">Prev</button>
+          <span class="muted">Page {{ p.currentPage }} / {{ p.totalPages }}</span>
+          <button class="btnSm ghost" type="button" (click)="nextPage()" [disabled]="p.currentPage >= p.totalPages">Next</button>
+        </div>
+      }
+    </section>
+
+  </section>
+</main>
