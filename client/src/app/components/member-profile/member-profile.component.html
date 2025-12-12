@@ -1,0 +1,176 @@
+<main class="synqProfile">
+
+  @if (stateSig() === 'loading') {
+    <section class="loading">
+      <div class="skCover"></div>
+      <div class="skCard"></div>
+      <div class="skGrid">
+        <div class="skBox"></div>
+        <div class="skBox"></div>
+      </div>
+      <div class="skPhotos"></div>
+    </section>
+  }
+
+  @if (stateSig() === 'error') {
+    <section class="error">
+      <div class="errorCard">
+        <h2>Couldn’t load this profile</h2>
+        <p>Try again, or go back to members.</p>
+        <div class="row">
+          <button class="btn primary" (click)="retry()">Retry</button>
+          <button class="btn ghost" (click)="back()">Back</button>
+        </div>
+      </div>
+    </section>
+  }
+
+  @if (stateSig() === 'ready' && memberSig(); as m) {
+    <!-- COVER -->
+    <section class="cover">
+      @if (coverUrlSig(); as c) {
+        <img class="coverImg" [src]="c" alt="Cover" (error)="onImgError($event)" />
+      }
+      <div class="coverOverlay"></div>
+
+      <div class="topBar">
+        <button class="iconBtn" (click)="back()">←</button>
+        <div class="topTitle">Profile</div>
+        <button class="iconBtn ghost" (click)="message()">💬</button>
+      </div>
+
+      <div class="heroCard">
+        <div class="avatarWrap">
+          @if (avatarUrlSig(); as av) {
+            <img class="avatar" [src]="av" alt="Avatar" (error)="onImgError($event)" />
+          } @else {
+            <div class="avatar fallback">{{ m.userName[0] | titlecase }}</div>
+          }
+          <span class="statusDot"></span>
+        </div>
+
+        <div class="meta">
+          <h1 class="name">
+            {{ m.userName }}
+            <span class="age">{{ m.age }}</span>
+          </h1>
+
+          <div class="sub">
+            <span>{{ m.city | titlecase }}, {{ m.country | titlecase }}</span>
+            <span class="dot">•</span>
+            <span>Last active: {{ m.lastActive | date:'mediumDate' }}</span>
+          </div>
+
+          @if (m.lookingFor?.trim()) {
+            <div class="badge">Looking for: {{ m.lookingFor }}</div>
+          }
+        </div>
+
+        <div class="cta">
+          <button class="btn primary" (click)="message()">Message</button>
+
+          @if (!isSelfProfileSig()) {
+            <button class="btn" [class.active]="isFollowingSig()" (click)="toggleFollow()">
+              @if (isFollowingSig()) { Following } @else { Follow }
+            </button>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="content">
+      <div class="grid">
+
+        <article class="panel">
+          <header class="panelHead">
+            <h2>About</h2>
+          </header>
+
+          <div class="block">
+            <div class="label">Introduction</div>
+            <div class="text">{{ m.introduction || '—' }}</div>
+          </div>
+
+          <div class="block">
+            <div class="label">Interests</div>
+            @if (m.interests?.trim()) {
+              <div class="tags">
+                @for (t of m.interests.split(','); track $index) {
+                  <span class="tag">{{ t.trim() }}</span>
+                }
+              </div>
+            } @else {
+              <div class="text">—</div>
+            }
+          </div>
+        </article>
+
+        <article class="panel">
+          <header class="panelHead">
+            <h2>Details</h2>
+          </header>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="sTop">Location</div>
+              <div class="sVal">{{ m.city | titlecase }}</div>
+              <div class="sHint">{{ m.country | titlecase }}</div>
+            </div>
+            <div class="stat">
+              <div class="sTop">Age</div>
+              <div class="sVal">{{ m.age }}</div>
+              <div class="sHint">years</div>
+            </div>
+            <div class="stat">
+              <div class="sTop">Photos</div>
+              <div class="sVal">{{ m.photos?.length ?? 0 }}</div>
+              <div class="sHint">items</div>
+            </div>
+          </div>
+
+          <div class="note">
+            Follow & posts will be enabled soon. This page is MVP-ready.
+          </div>
+        </article>
+
+      </div>
+
+      <section class="photos">
+        <div class="photosHead">
+          <h2>Photos</h2>
+          <span class="muted">{{ m.photos?.length ?? 0 }} items</span>
+        </div>
+
+        @if ((m.photos?.length ?? 0) === 0) {
+          <div class="empty">
+            <div class="emoji">🖼️</div>
+            <div class="t1">No photos yet</div>
+            <div class="t2">This user hasn’t uploaded photos.</div>
+          </div>
+        } @else {
+          <div class="photoGrid">
+            @for (p of m.photos; track $index) {
+              @if (photoThumb(p); as src) {
+                <button class="ph" type="button" (click)="openPhoto(photoBig(p) || src)">
+                  <img [src]="src" alt="Photo" />
+                  @if (p.isMain) { <span class="main">Main</span> }
+                </button>
+              }
+            }
+          </div>
+        }
+      </section>
+    </section>
+
+    <!-- MODAL -->
+    @if (isModalOpenSig() && selectedUrlSig(); as u) {
+      <div class="modal" (click)="closeModal()">
+        <div class="modalInner" (click)="$event.stopPropagation()">
+          <button class="close" (click)="closeModal()">✕</button>
+          <img class="modalImg" [src]="u" alt="Preview" />
+        </div>
+      </div>
+    }
+  }
+</main>
