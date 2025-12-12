@@ -14,6 +14,17 @@ public class MemberRepository : IMemberRepository
         _collection = dbName.GetCollection<AppUser>("users");
     }
 
+    public async Task<PagedList<AppUser>> GetAllAsync(PaginationParams paginationParams, CancellationToken cancellationToken)
+    {
+        IQueryable<AppUser> query = _collection.AsQueryable();
+
+        PagedList<AppUser> appUsers = await PagedList<AppUser>.CreatePagedListAsync(
+            query, paginationParams.PageNumber, paginationParams.PageSize, cancellationToken
+        );
+
+        return appUsers;
+    }
+
     public async Task<MemberDto?> GetByUserNameAsync(string userName, CancellationToken cancellationToken)
     {
         AppUser? appUser = await _collection.Find
