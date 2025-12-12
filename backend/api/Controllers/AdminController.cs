@@ -6,7 +6,7 @@ namespace api.Controllers;
 [Authorize(Policy = "RequiredAdminRole")]
 public class AdminController(IAdminRepository _adminRepository) : BaseApiController
 {
-    [HttpGet("user-with-roles")]
+    [HttpGet("users-with-roles")]
     public async Task<ActionResult<IEnumerable<UserWithRoleDto>>> UserWithRoles()
     {
         IEnumerable<UserWithRoleDto> users = await _adminRepository.GetUsersWithRolesAsync(); 
@@ -14,7 +14,7 @@ public class AdminController(IAdminRepository _adminRepository) : BaseApiControl
         return !users.Any() ? NoContent() : Ok(users);
     }
 
-    [HttpPut("delete-user/{targetUserName}")]
+    [HttpDelete("delete-user/{targetUserName}")]
     public async Task<ActionResult<Response>> DeleteUser(string targetUserName, CancellationToken cancellationToken)
     {
         string? userId = User.GetUserId();
