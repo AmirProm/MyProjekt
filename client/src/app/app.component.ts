@@ -27,10 +27,17 @@ export class AppComponent implements OnInit {
   accountService = inject(AccountService);
   private platformId = inject(PLATFORM_ID);
    constructor(private spinner: NgxSpinnerService) {}
-
-
+ 
   ngOnInit(): void {
-    localStorage.clear();
+    let loggedInUserStr: string | null  = localStorage.getItem('loggedInUser');
+      console.log(loggedInUserStr);
+    
+    if (loggedInUserStr != null) {
+      this.accountService.authorizeLoggedInUser();
+
+      this.accountService.setCurrentUser(JSON.parse(loggedInUserStr))
+    }
+    
     // اگر روی سرور هستیم، اصلاً سراغ localStorage نرو
     if (!isPlatformBrowser(this.platformId)) {
       const loggedInUserStr = localStorage.getItem('loggedInUser');
