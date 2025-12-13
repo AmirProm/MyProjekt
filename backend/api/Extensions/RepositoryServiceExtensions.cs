@@ -1,4 +1,6 @@
 using api.Services;
+using API.Interfaces;
+using API.Repositories;
 using Image_Processing_WwwRoot.Interfaces;
 using Image_Processing_WwwRoot.Services;
 
@@ -15,8 +17,10 @@ public static class RepositoryServiceExtensions
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoModifySaveService, PhotoModifySaveService>();
         services.AddScoped<IPhotoService, PhotoService>();
+        services.AddScoped<IPostRepository, PostRepository>();
         services.AddScoped<IAdminRepository, AdminRepository>();
-        
+
+
         return services;
     }
 }
