@@ -31,4 +31,15 @@ public class ChatController(IChatRepository chatRepository) : ControllerBase
 
         return Ok(userMessage);
     }
+
+    [Authorize(Roles = "admin")]
+    [HttpDelete("message/{messageId}")]
+    public async Task<ActionResult> DeleteMessage(string messageId)
+    {
+        var deleted = await chatRepository.DeletMassageAsync(messageId);
+        if (!deleted)
+            return NotFound("message is not found 404");
+
+        return Ok("message is deleted");
+    }
 }
