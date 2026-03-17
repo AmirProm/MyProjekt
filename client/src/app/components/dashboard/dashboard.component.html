@@ -1,198 +1,278 @@
-<main class="dash">
-
-    <!-- HERO -->
+<div class="dash">
     <section class="hero">
         <div class="heroCard">
-
             <div class="meRow">
-                <div class="avatarWrap">
-                    @if (avatarUrlSig(); as av) {
-                    <img class="avatar" [src]="av" alt="Profile photo" (error)="onImgError($event)" />
-                    } @else {
-                    <div class="avatar fallback">{{ displayNameSig()[0] | titlecase }}</div>
-                    }
-                    <span class="statusDot" title="Online"></span>
+                <div class="meMain">
+                    <div class="avatarWrap">
+                        @if (avatarUrlSig(); as av) {
+                        <img class="avatar" [src]="av" (error)="onImgError($event)" alt="profile avatar" />
+                        } @else {
+                        <div class="avatar fallback">
+                            {{ displayNameSig()[0] }}
+                        </div>
+                        }
+
+                        <span class="statusDot" [class.loading]="stateSig() === 'loading'"
+                            [class.error]="stateSig() === 'error'" [class.ready]="stateSig() === 'ready'">
+                        </span>
+                    </div>
+
+                    <div class="intro">
+                        <div class="eyebrow">Dashboard overview</div>
+
+                        <h1 class="title">
+                            Welcome back,
+                            <span class="accent">{{ displayNameSig() }}</span>
+                        </h1>
+
+                        <div class="sub">
+                            <span>{{ emailSig() }}</span>
+                            <span class="dot">•</span>
+                            <span *ngIf="stateSig() === 'loading'">Loading profile...</span>
+                            <span *ngIf="stateSig() === 'error'">Profile unavailable</span>
+                            <span *ngIf="stateSig() === 'ready'">Profile ready</span>
+                        </div>
+
+                        @if (memberSig(); as m) {
+                        <div class="pillRow">
+                            @if (m.city) {
+                            <span class="pill">{{ m.city }}</span>
+                            }
+                            @if (m.country) {
+                            <span class="pill">{{ m.country }}</span>
+                            }
+                            @if (m.age) {
+                            <span class="pill">{{ m.age }} yrs</span>
+                            }
+                        </div>
+                        }
+                    </div>
                 </div>
 
-                <div class="meMeta">
-                    <h1 class="title">
-                        Welcome back, <span class="accent">{{ displayNameSig() }}</span>
-                    </h1>
-
-                    <p class="sub">
-                        <span class="muted">{{ emailSig() }}</span>
-                        <span class="dot">•</span>
-
-                        @if (stateSig() === 'loading') { <span class="muted">Loading profile…</span> }
-                        @if (stateSig() === 'error') { <span class="warn">Couldn’t load profile</span> }
-                        @if (stateSig() === 'ready') { <span class="muted">Ready</span> }
-                    </p>
-
-                    @if (memberSig(); as m) {
-                    <div class="pillRow">
-                        <span class="pill">{{ m.city | titlecase }}, {{ m.country | titlecase }}</span>
-                        <span class="pill">{{ m.age }} yrs</span>
-                        <span class="pill">Last active: {{ m.lastActive | date:'mediumDate' }}</span>
-                    </div>
-                    }
+                <div class="actions">
+                    <button class="btn primary" (click)="goEditProfile()">Edit profile</button>
+                    <button class="btn ghost" (click)="goPhotos()">Manage photos</button>
                 </div>
             </div>
 
             <div class="kpiRow">
                 <div class="kpi">
-                    <div class="kpiTop"><span>Posts</span><span class="kpiIcon">▦</span></div>
+                    <div class="kpiTop">Posts</div>
                     <div class="kpiVal">{{ kpiSig().posts }}</div>
-                    <div class="kpiHint">Coming soon</div>
+                    <div class="kpiHint">Your shared updates</div>
                 </div>
 
                 <div class="kpi">
-                    <div class="kpiTop"><span>Followers</span><span class="kpiIcon">👥</span></div>
+                    <div class="kpiTop">Followers</div>
                     <div class="kpiVal">{{ kpiSig().followers }}</div>
-                    <div class="kpiHint">Coming soon</div>
+                    <div class="kpiHint">People following you</div>
                 </div>
 
                 <div class="kpi">
-                    <div class="kpiTop"><span>Following</span><span class="kpiIcon">➕</span></div>
+                    <div class="kpiTop">Following</div>
                     <div class="kpiVal">{{ kpiSig().following }}</div>
-                    <div class="kpiHint">Coming soon</div>
+                    <div class="kpiHint">Profiles you follow</div>
                 </div>
 
                 <div class="kpi">
-                    <div class="kpiTop"><span>Chats</span><span class="kpiIcon">💭</span></div>
+                    <div class="kpiTop">Chats</div>
                     <div class="kpiVal">{{ kpiSig().chats }}</div>
-                    <div class="kpiHint">Coming soon</div>
+                    <div class="kpiHint">Your conversations</div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- GRID -->
     <section class="grid">
-
-        <!-- PROFILE -->
-        <section class="panel">
+        <div class="panel panelCompletion">
             <div class="panelHead">
-                <h2>Profile completeness</h2>
-                <button class="linkBtn" type="button" (click)="goEditProfile()">Improve</button>
+                <div>
+                    <div class="panelEyebrow">Profile</div>
+                    <h3>Completion status</h3>
+                </div>
+
+                @if (profileScoreSig() < 100) { <button class="linkBtn" (click)="goEditProfile()">Improve</button>
+                    }
             </div>
 
-            <div class="progressRow">
+            @if (profileScoreSig() < 100) { <div class="progressWrap">
+                <div class="progressMeta">
+                    <div class="progressTitle">Complete your profile to unlock more visibility</div>
+                    <div class="score">{{ profileScoreSig() }}%</div>
+                </div>
+
                 <div class="bar">
                     <div class="fill" [style.width.%]="profileScoreSig()"></div>
                 </div>
-                <div class="score">{{ profileScoreSig() }}%</div>
-            </div>
+        </div>
 
-            <div class="steps">
-                @for (s of nextStepsSig(); track $index) {
-                <div class="step" [class.done]="s.done">
-                    <span class="stepIcon">{{ s.done ? '✅' : '⭕' }}</span>
-                    <span class="stepText">{{ s.label }}</span>
-                    @if (!s.done) {
-                    <button class="miniBtn" type="button"
-                        (click)="s.action === 'photos' ? goPhotos() : goEditProfile()">Fix</button>
-                    }
+        <div class="steps">
+            @for (s of nextStepsSig(); track $index) {
+            <div class="step" [class.done]="s.done">
+                <div class="stepLeft">
+                    <div class="stepIcon">
+                        <span *ngIf="s.done">✓</span>
+                        <span *ngIf="!s.done">+</span>
+                    </div>
+                    <div class="stepText">{{ s.label }}</div>
                 </div>
+                @if (!s.done) {
+                <button class="miniBtn" (click)="s.action === 'photos' ? goPhotos() : goEditProfile()">
+                    Complete
+                </button>
                 }
             </div>
-
-            @if (memberSig(); as m) {
-            <div class="bio">
-                <div class="bioItem">
-                    <div class="bioLabel">Introduction</div>
-                    <div class="bioText">{{ m.introduction || '—' }}</div>
-                </div>
-                <div class="bioItem">
-                    <div class="bioLabel">Looking for</div>
-                    <div class="bioText">{{ m.lookingFor || '—' }}</div>
-                </div>
-                <div class="bioItem">
-                    <div class="bioLabel">Interests</div>
-                    <div class="bioText">{{ m.interests || '—' }}</div>
-                </div>
-            </div>
             }
-        </section>
+        </div>
 
-        <!-- MEMBERS -->
-        <section class="panel">
-            <div class="panelHead">
-                <h2>Members</h2>
+        @if (memberSig(); as m) {
+        <div class="bio">
+            <div class="bioItem">
+                <div class="bioLabel">Introduction</div>
+                <div class="bioText">{{ m.introduction || 'Not added yet' }}</div>
+            </div>
 
-                <div class="searchWrap">
-                    <input class="search" type="text" placeholder="Search username" [value]="querySig()"
-                        (input)="onQuery(($any($event.target)).value)" />
-                    <button class="btnSm" type="button" (click)="searchNow()">Search</button>
-                    <button class="btnSm ghost" type="button" (click)="querySig.set(''); clearSearch()">Clear</button>
+            <div class="bioItem">
+                <div class="bioLabel">Looking for</div>
+                <div class="bioText">{{ m.lookingFor || 'Not added yet' }}</div>
+            </div>
+
+            <div class="bioItem">
+                <div class="bioLabel">Interests</div>
+                <div class="bioText">{{ m.interests || 'Not added yet' }}</div>
+            </div>
+        </div>
+        }
+        } @else {
+        <div class="completeState">
+            <div class="completeGlow"></div>
+
+            <div class="completeBadge">100% Complete</div>
+
+            <h4 class="completeTitle">Your profile is fully optimized</h4>
+
+            <p class="completeText">            </p>
+
+            <div class="unlockGrid">
+                <div class="unlockCard">
+                    <div class="unlockIcon">↑</div>
+                    <div class="unlockLabel">Priority visibility</div>
+                    <div class="unlockHint">You appear stronger in discovery views</div>
+                </div>
+
+                <div class="unlockCard">
+                    <div class="unlockIcon">∞</div>
+                    <div class="unlockLabel">Unlimited chats</div>
+                    <div class="unlockHint">Reach out faster without friction</div>
+                </div>
+
+                <div class="unlockCard">
+                    <div class="unlockIcon">⌕</div>
+                    <div class="unlockLabel">Advanced search access</div>
+                    <div class="unlockHint">Better filtering and faster matching</div>
                 </div>
             </div>
 
-            <div class="hintRow">
-                @if (isSearchModeSig()) {
-                @if (searchStateSig() === 'loading') { <span class="muted">Searching…</span> }
-                @if (searchStateSig() === 'notfound') { <span class="warn">No user found.</span> }
-                @if (searchStateSig() === 'error') { <span class="warn">Search failed.</span> }
-                @if (searchStateSig() === 'done') { <span class="muted">Result</span> }
+            <div class="completeActions">
+                <button class="btn primary" (click)="goPhotos()">Refresh gallery</button>
+                <button class="btn ghost" (click)="goExplore()">More Feed...</button>
+            </div>
+        </div>
+        }
+</div>
+
+<div class="panel panelMembers">
+    <div class="panelHead">
+        <div>
+            <div class="panelEyebrow">Community</div>
+            <h3>Discover members</h3>
+        </div>
+    </div>
+
+    <div class="searchWrap">
+        <input class="search" type="text" placeholder="Search by username..." [value]="querySig()"
+            (input)="onQuery(($any($event.target)).value)" />
+
+        <button class="btnSm primary" (click)="searchNow()">Search</button>
+        <!-- <button class="btnSm ghost" (click)="querySig.set(''); clearSearch()">Clear</button> -->
+    </div>
+
+    @if (isSearchModeSig()) {
+    <div class="hintRow">
+        <span class="muted" *ngIf="searchStateSig() === 'typing'">Typing...</span>
+        <span class="muted" *ngIf="searchStateSig() === 'loading'">Searching...</span>
+        <span class="muted" *ngIf="searchStateSig() === 'done'">1 result found</span>
+        <span class="warn" *ngIf="searchStateSig() === 'notfound'">No user found</span>
+        <span class="warn" *ngIf="searchStateSig() === 'error'">Search failed</span>
+    </div>
+    }
+
+    @if (membersSig().length > 0) {
+    <div class="members">
+        @for (m of membersSig(); track m.userName) {
+        <div class="card" (click)="openMember(m)">
+            <div class="cardTop">
+                @if (memberAvatar(m); as img) {
+                <img class="mAvatar" [src]="img" (error)="onImgError($event)" alt="member avatar" />
                 } @else {
-               
+                <div class="mAvatar fallback">{{ m.userName[0] }}</div>
                 }
-            </div>
-
-            <div class="members">
-                @for (m of membersSig(); track m.userName) {
-                <article class="card" (click)="openMember(m)">
-                    <div class="cardTop">
-                        @if (memberAvatar(m); as img) {
-                        <img class="mAvatar" [src]="img" alt="Member avatar" (error)="onImgError($event)" />
-                        } @else {
-                        <div class="mAvatar fallback">{{ m.userName[0] | titlecase }}</div>
-                        }
-
-                        <div class="mMeta">
-                            <div class="mName">{{ m.userName }}</div>
-                            <div class="mSub">{{ m.city | titlecase }} {{ m.country | titlecase }} • {{ m.age }}</div>
-                        </div>
+                <div>
+                    <div class="mName">{{ m.userName }}</div>
+                    <div class="mSub">
+                        {{ m.city || 'Unknown city' }}
+                        <span *ngIf="m.country">, {{ m.country }}</span>
+                        <span *ngIf="m.age"> • {{ m.age }} yrs</span>
                     </div>
-
-                    <div class="mBio">{{ m.introduction || '—' }}</div>
-
-                    <div class="cardActions">
-                        <button class="btnSm" type="button"
-                            (click)="$event.stopPropagation(); followSoon()">Follow</button>
-                        <button class="btnSm ghost" type="button"
-                            (click)="$event.stopPropagation(); goChat()">Message</button>
-                    </div>
-                </article>
-                }
-
-                @if (membersSig().length === 0) {
-                <div class="empty">
-                    <div>No members to show.</div>
-                    <button class="btnSm" type="button" (click)="clearSearch()">Back</button>
                 </div>
-                }
             </div>
 
-            @if (!isSearchModeSig() && paginationInfoSig(); as p) {
-            <div class="pager">
-                <button class="btnSm ghost" type="button" (click)="prevPage()"
-                    [disabled]="p.currentPage <= 1">Prev</button>
-                <span class="muted">Page {{ p.currentPage }} / {{ p.totalPages }}</span>
-                <button class="btnSm ghost" type="button" (click)="nextPage()"
-                    [disabled]="p.currentPage >= p.totalPages">Next</button>
+            <div class="mBio">
+                {{ m.introduction || 'No introduction added yet.' }}
             </div>
-            }
-        </section>
 
-    </section>
-</main>
+            <div class="cardActions">
+                <button class="btnSm ghost" (click)="$event.stopPropagation(); followSoon()">
+                    Follow
+                </button>
+                <button class="btnSm primary" (click)="$event.stopPropagation(); goChat()">
+                    Message
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    } @else {
+    <div class="empty">
+        <div class="emptyTitle">No members to show</div>
+        <div class="emptyText">Totry anher username or return to the full list.</div>
+        <button class="btnSm ghost" (click)="clearSearch()">Reset view</button>
+    </div>
+    }
 
-<!-- 
-@if (loggedInUser.roles.inculde('admin')) {
-    <app-admin-sidebar />
+    @if (!isSearchModeSig() && paginationInfoSig(); as p) {
+    <div class="pager">
+        <button class="btnSm ghost" (click)="prevPage()" [disabled]="p.currentPage <= 1">
+            Prev
+        </button>
 
-}
-@else { 
-    <app-member-dashboard />
-} -->
+        <div class="pagerInfo">
+            Page {{ p.currentPage }} of {{ p.totalPages }}
+        </div>
+
+        <button class="btnSm ghost" (click)="nextPage()" [disabled]="p.currentPage >= p.totalPages">
+            Next
+        </button>
+    </div>
+    }
+
+</div>
+<app-create-post></app-create-post>
+</section>
+
+<div class="grid_post">
+
+   
+
+</div>
+</div>

@@ -13,15 +13,16 @@ import { PaginatedResult } from '../../models/helpers/paginatedResult';
 import { PaginationHandler } from '../../extensions/paginationHandler';
 import { PaginationParams } from '../../models/helpers/paginationParams.model';
 import { Pagination } from '../../models/helpers/pagination';
-
-
-
+import { MemberParams } from '../../models/helpers/member-params';
+import { IntlModule } from "angular-ecmascript-intl";
+import { PostCreateComponent } from "../post/post-create/post-create.component";
+import { PostFeedComponent } from '../post/post-feed/post-feed.component';
 
 type LoadState = 'idle' | 'loading' | 'ready' | 'error';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MatIcon, TitleCasePipe, DatePipe],
+  imports: [MatIcon, IntlModule,PostCreateComponent, PostFeedComponent,TitleCasePipe, DatePipe],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -42,7 +43,7 @@ export class DashboardComponent {
   // members list (REAL)
   membersSig = signal<Member[]>([]);
   paginationInfoSig = signal<Pagination | null>(null);
-  paginationParamsSig = signal<PaginationParams>(new PaginationParams());
+  MemberParamsSig = signal<MemberParams>(new MemberParams());
 
   // server-search
   querySig = signal<string>('');
@@ -54,9 +55,10 @@ export class DashboardComponent {
   displayNameSig = computed(() => this.userSig()?.userName ?? 'User');
   emailSig = computed(() => this.userSig()?.email ?? '');
 
+  
   // KPI (فعلاً 0)
-  kpiSig = computed(() => ({ posts: 0, followers: 0, following: 0, chats: 0 }));
-
+  kpiSig = computed(() => ({ posts: 0, followers: 0, following: 0, chats: 1 }));
+ //5%  Profile Score:
   avatarUrlSig = computed(() => {
     const u = this.userSig();
     const m = this.memberSig();
@@ -71,7 +73,7 @@ export class DashboardComponent {
   profileScoreSig = computed(() => {
     const m = this.memberSig();
     if (!m) return 0;
-
+    
     const checks = [
       !!m.introduction?.trim(),
       !!m.lookingFor?.trim(),
@@ -81,9 +83,10 @@ export class DashboardComponent {
       (m.photos?.length ?? 0) > 0,
     ];
     const score = Math.round((checks.filter(Boolean).length / checks.length) * 100);
-    return Math.max(5, score);
+    return Math.max(10, score);
   });
-
+  
+  //Profile Score: 100%
   nextStepsSig = computed(() => {
     const m = this.memberSig();
     return [
@@ -94,9 +97,11 @@ export class DashboardComponent {
     ];
   });
 
+  
+
   totalPagesSig = computed(() => {
     const info = this.paginationInfoSig();
-    const params = this.paginationParamsSig();
+    const params = this.MemberParamsSig();
     if (!info) return 1;
     return Math.max(1, Math.ceil(info.totalItems / params.pageSize));
   });
@@ -126,7 +131,7 @@ export class DashboardComponent {
 
     // Members load (paged) - only when NOT searching
     effect(() => {
-      const params = this.paginationParamsSig();
+      const params = this.MemberParamsSig();
       const isSearch = this.isSearchModeSig();
       if (isSearch) return;
 
@@ -180,16 +185,16 @@ export class DashboardComponent {
 
   // ---- Pagination ----
   prevPage() {
-    const p = this.paginationParamsSig();
+    const p = this.MemberParamsSig();
     if (p.pageNumber <= 1) return;
-    this.paginationParamsSig.set({ ...p, pageNumber: p.pageNumber - 1 });
+    this.MemberParamsSig.set({ ...p, pageNumber: p.pageNumber - 1 });
   }
 
   nextPage() {
-    const p = this.paginationParamsSig();
+    const p = this.MemberParamsSig();
     const max = this.totalPagesSig();
     if (p.pageNumber >= max) return;
-    this.paginationParamsSig.set({ ...p, pageNumber: p.pageNumber + 1 });
+    this.MemberParamsSig.set({ ...p, pageNumber: p.pageNumber + 1 });
   }
 
   // ---- SERVER SEARCH (getByUserName) ----
@@ -222,8 +227,8 @@ export class DashboardComponent {
     this.searchStateSig.set('idle');
 
     // trigger reload by nudging params
-    const p = this.paginationParamsSig();
-    this.paginationParamsSig.set({ ...p });
+    const p = this.MemberParamsSig();
+    this.MemberParamsSig.set({ ...p });
   }
 
   private searchByUsername(userName: string) {
@@ -248,6 +253,6 @@ export class DashboardComponent {
   }
 
   followSoon() {
-    // بعداً API follow
+//SOON
   }
 }

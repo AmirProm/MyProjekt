@@ -38,6 +38,9 @@
     <!-- لیست پیام‌ها -->
     <div class="messages-list">
       @for (message of messages(); track $index; let last = $last) {
+      <button *ngIf="isadmin" (click)="deleteMessage(message)">
+        🗑
+      </button>
       <div class="message-wrapper" [class.message-mine]="isMine(message)">
         <div class="message-bubble">
           <!-- هدر پیام -->
@@ -101,17 +104,17 @@
   </div>
 </div>
 
- <div class="chat-input">
-    <button type="button"  (click)="showEmojis = !showEmojis">
-      😊
+<div class="chat-input">
+  <button type="button" (click)="showEmojis = !showEmojis">
+    😊
 
 
-      <div class="emoji-box" *ngIf="showEmojis">
-        <emoji-mart title="Pick emoji" emoji="speech_balloon" (emojiSelect)="addEmoji($event)">
-        </emoji-mart>
-      </div>
+    <div class="emoji-box" *ngIf="showEmojis">
+      <emoji-mart title="Pick emoji" emoji="speech_balloon" (emojiSelect)="addEmoji($event)">
+      </emoji-mart>
+    </div>
 
-<!-- <div class="chat-root">
+    <!-- <div class="chat-root">
   <div class="chat-header">
     <div class="header-main">
       <div class="header-info">

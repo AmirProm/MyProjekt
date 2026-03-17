@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
+import { AccountService } from '../../services/account.service';
 import { ChatSerivce } from '../../services/chat.service';
 import { LoggedIn } from '../../models/logged-in.model';
 import { ChatMessage } from '../../models/chat-massage.model';
@@ -17,14 +18,23 @@ import { take } from 'rxjs';
 })
 export class Chat implements OnInit {
   private chatService = inject(ChatSerivce);
+  private accountService = inject(AccountService);
 
   messageText = '';
   messages = this.chatService.messages;
 
-  currentUser: LoggedIn | null = null;
+  currentUser: LoggedIn | null = null; 
+
+  // ✅ برای admin
+  isadmin = false;
 
   ngOnInit(): void {
     this.currentUser = this.getCurrentUser();
+
+    // ✅ تشخیص admin
+    if (this.currentUser?.roles) {
+      this.isadmin = this.currentUser.roles.includes('admin');
+    }
 
     this.chatService.startConnection();
     this.chatService.loadMessage().pipe(take(1)).subscribe();
@@ -47,6 +57,17 @@ export class Chat implements OnInit {
     this.chatService.sendMessage(this.currentUser.userName, this.messageText);
     this.messageText = '';
   }
+
+  // ✅ حذف پیام (فقط admin)
+  deleteMessage(message: ChatMessage) {
+    if (!this.isadmin) return;
+    if (!message.id) return;
+
+    if (!confirm('Delete this message?')) return;
+
+    this.chatService.deleteMessage(message.id).subscribe();
+  }
+
   showEmojis = false;
 
   addEmoji(event: any) {
