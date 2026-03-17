@@ -37,7 +37,8 @@ export class ChatSerivce {
         const newMessage: ChatMessage = {
           user,
           message,
-          TimeStamp: sentAt ?? new Date().toISOString()
+          TimeStamp: sentAt ?? new Date().toISOString(),
+          id: undefined
         };
 
         this.messagesSignal.update(msgs => [...msgs, newMessage]);
@@ -60,5 +61,9 @@ export class ChatSerivce {
       })
     );
   }
-  
+
+  deleteMessage(messageId: string) {
+    return this._http.delete(this.apiUrl + '/' + messageId)
+  }
+
 }
