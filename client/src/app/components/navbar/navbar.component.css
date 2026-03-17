@@ -24,8 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   background: rgba(248, 250, 252, 0.96);
   border-bottom: 1px solid rgba(226, 232, 240, 0.9);
 }
@@ -299,7 +298,4 @@
   body {
     padding-bottom: 60px;
   }
-}
-/* دسکتاپ: اگر خواستی محتوا زیر سایدبار نره، می‌تونی اینو در styles.scss سراسری اضافه کنی:
-   body { margin-left: 240px; }
-   اینجا نمی‌ذارم چون global هست، ولی بدون اگر روی فرم‌ها overlap دیدی، این راه‌حلشه. *//*# sourceMappingURL=navbar.component.css.map */
+}/*# sourceMappingURL=navbar.component.css.map */
