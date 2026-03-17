@@ -7,6 +7,9 @@ namespace api.Models;
 [CollectionName("users")]
 public class AppUser : MongoIdentityUser<ObjectId>
 {
+    public string? IdentifierHash { get; init; }
+    public string? JtiValue { get; init; }
+    public string KnownAs { get; init; } = string.Empty;
     public DateOnly DateOfBirth { get; init; }
     public DateTime LastActive { get; init; }
     public string Gender { get; init; } = string.Empty;
@@ -15,7 +18,10 @@ public class AppUser : MongoIdentityUser<ObjectId>
     public string Interests { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;
     public string Country { get; init; } = string.Empty;
+    public string? PhotoUrl { get; set; }
     public List<Photo> Photos { get; init; } = [];
+    public int FollowingsCount { get; init; }
+    public int FollowersCount { get; init; }
 }
 
 // public record AppUser(
