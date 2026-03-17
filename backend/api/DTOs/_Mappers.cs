@@ -1,5 +1,3 @@
-using api.Extensions;
-
 namespace api.DTOs;
 
 public static class Mappers
@@ -10,6 +8,7 @@ public static class Mappers
         {
             Email = registerDto.Email,
             UserName = registerDto.UserName,
+            DateOfBirth = registerDto.DateOfBirth
         };
 
         return appUser;
@@ -28,7 +27,7 @@ public static class Mappers
         // return loggedInDto;
 
         return new LoggedInDto
-        {   
+        {
             Token = tokenValue,
             Email = appUser.Email,
             UserName = appUser.UserName,
@@ -71,5 +70,16 @@ public static class Mappers
             Url_enlarged: photoUrls[2],
             IsMain: isMain
         );
+    }
+ 
+
+    public static Follow? ConvertAppUsertoFollow(ObjectId? followerId, ObjectId? followedId)
+    {
+        return new Follow(
+                Schema: AppVariablesExtensions.AppVersions.Last<string>(),
+                Id: ObjectId.GenerateNewId(),
+                FollowerId: followerId,
+                FollowedMemberId: followedId
+            );
     }
 }
