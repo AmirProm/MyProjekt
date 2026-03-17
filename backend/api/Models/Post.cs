@@ -1,25 +1,16 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDbGenericRepository.Attributes;
 
-namespace API.Entities;
-
-[CollectionName("posts")]
 public class Post
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; } = null!;
+    public string Id { get; set; }
 
-    [BsonElement("userName")]
-    public string UserName { get; set; } = null!;
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string UserId { get; set; }
 
-    [BsonElement("caption")]
-    public string Caption { get; set; } = string.Empty;
+    public string Caption { get; set; }
 
-    [BsonElement("photoUrl")]
-    public string PhotoUrl { get; set; } = string.Empty;
-
-    [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
