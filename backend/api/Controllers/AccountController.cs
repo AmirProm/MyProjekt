@@ -1,3 +1,4 @@
+using api.Enums;
 using api.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -12,17 +13,17 @@ public class AccountController(IAccountRepository accountRepository) : BaseApiCo
         if (userInput.Password != userInput.ConfirmPassword)
             return BadRequest("Your passwords do not match!");
 
-        LoggedInDto? loggedInDto = await accountRepository.RegisterAsync(userInput, cancellationToken);
+        OperationResult<LoggedInDto> opResult = await accountRepository.RegisterAsync(userInput, cancellationToken);
 
-        if (loggedInDto?.Errors.Count() > 0)
+        return opResult.IsSucces == true
+        ? opResult.Result
+        : opResult.Error?.Code switch
         {
-            foreach (var error in loggedInDto.Errors)
-            {
-                return BadRequest(error);
-            }
-        }
-
-        return Ok(loggedInDto);
+            ErrorCode.NetIdentityFailed => BadRequest(opResult.Error.Massage),
+            ErrorCode.NetIdentityRoleFailed => BadRequest(opResult.Error.Massage),
+            ErrorCode.IsTokenFailed => BadRequest(opResult.Error.Massage),
+            _ => BadRequest("Opertion faailde! Try agine or Contact Support!")
+        };
     }
 
     [HttpPost("login")]
