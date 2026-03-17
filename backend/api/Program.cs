@@ -27,6 +27,8 @@ app.UseCors();
 
 app.UseAuthentication();
 
+app.UseStaticFiles();
+
 app.MapHub<ChatHub>("/chatHub");
 
 app.UseAuthorization();
