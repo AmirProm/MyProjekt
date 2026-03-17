@@ -1,0 +1,55 @@
+@if (memberIn) {
+<article class="member-card">
+
+  <!-- بخش بالایی: تصویر و دکمه‌های اکشن -->
+  <div class="card-body" [routerLink]="['/members/' + memberIn.userName]">
+    <header class="card-header">
+      <div class="image-wrapper">
+        <!-- شرط نداشتن عکس -->
+        @if (memberIn.photos.length === 0) {
+        <img src="synq.jpeg" alt="{{ memberIn.userName }}" class="profile-img">
+        }
+        <!-- شرط داشتن عکس -->
+        @else {
+        @for (photo of memberIn.photos; track $index) {
+        @if (photo.isMain) {
+        <img [src]="apiUrl + photo.url_165" alt=" {{ memberIn.userName }}" class="profile-img">
+        }
+        }
+        }
+
+        <!-- یک لایه تاریک ملایم روی عکس برای بهتر دیده شدن دکمه‌ها -->
+        <div class="overlay"></div>
+      </div>
+
+      <!-- دکمه‌های شناور (اکشن‌ها) -->
+      <!-- <ul class="action-buttons">
+      <li>
+        <button class="btn-action btn-primary" aria-label="افزودن کاربر">
+          <i class="icon-person-add"></i>
+        </button>
+      </li>
+      <li>
+        <button class="btn-action btn-warn" aria-label="علاقه‌مندی">
+          <i class="icon-favorite"></i>
+        </button>
+      </li>
+      <li>
+        <button class="btn-action btn-accent" aria-label="ارسال پیام">
+          <i class="icon-mail"></i>
+        </button>
+      </li>
+    </ul> -->
+    </header>
+
+    <!-- بخش پایینی: اطلاعات کاربر (قابل کلیک برای انتقال به صفحه جزئیات) -->
+    <div class="user-info">
+      <h3 class="username">{{ memberIn.userName }}</h3>
+      <div class="meta-data">
+        <span class="age">{{ memberIn.age }} Age</span>
+      </div>
+    </div>
+  </div>
+
+</article>
+}

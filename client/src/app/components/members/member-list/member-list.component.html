@@ -1,0 +1,113 @@
+<section class="members-container">
+  
+  <!-- سایدبار: فرم فیلتر و جستجو -->
+  <aside class="sidebar-filter">
+    <h1 class="page-title">Find Your Beloved One!</h1>
+    
+    <form class="filter-form">
+      <!-- بخش مرتب‌سازی -->
+      <div class="form-group">
+        <label for="sortMembers" class="form-label">Sort members</label>
+        <div class="custom-select-wrapper">
+          <!-- در HTML خام به جای selectionChange از change استفاده می‌شود -->
+          <select id="sortMembers" class="custom-input" [formControl]="OrderByCtrl" (change)="updateMemberParams(); getAll();">
+            @for (orderOption of orderOptions; track $index) {
+              <option [value]="orderOption" [disabled]="orderOption === memberParams?.orderBy">
+                {{ orderOptionsView[$index] }}
+              </option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- بخش جستجو -->
+      <div class="form-group">
+        <label for="searchQuery" class="form-label">Search members</label>
+         <mat-form-field id="searchQuery" class="custom-input" >
+        <input [formControl]="SearchCtrl" matInput placeholder="By Useraname or city" type="text">
+      </mat-form-field>
+
+      </div>
+
+      <!-- بخش رنج سنی (جایگزین اسلایدر متریال با دو اینپوت تمیز) -->
+      <div class="form-group">
+        <label class="form-label">By age range</label>
+        <div class="age-range-inputs">
+          <div class="input-box">
+            <span class="prefix">Min</span>
+            <input type="number" class="custom-input text-center" [formControl]="MinAgeCtrl" [min]="minAge" [max]="maxAge">
+          </div>
+          <span class="divider">-</span>
+          <div class="input-box">
+            <span class="prefix">Max</span>
+            <input type="number" class="custom-input text-center" [formControl]="MaxAgeCtrl" [min]="minAge" [max]="maxAge">
+          </div>
+        </div>
+      </div>
+
+      <!-- دکمه‌های اکشن -->
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary" (click)="updateMemberParams(); getAll();">
+          Apply Filter
+        </button>
+        <button type="button" class="btn btn-warn-outline" (click)="reset()">
+          Reset
+        </button>
+      </div>
+    </form>
+  </aside>
+
+  <!-- بخش اصلی: لیست کاربران و صفحه‌بندی -->
+  <main class="main-content">
+    
+    <!-- گرید کاربران -->
+    <div class="members-grid">
+      @if (members?.length === 0) {
+        <div class="empty-state">
+          <div class="icon-placeholder">🔍</div>
+          <p>No user exists with this filter.<br>Please change the filter values or Reset.</p>
+        </div>
+      }
+      
+      @for (member of members; track $index) {
+        <!-- کامپوننت کارت شما که قبلاً استایل دادیم -->
+        <app-member-card [memberInput]="member"></app-member-card>
+      }
+    </div>
+
+    <!-- صفحه‌بندی اختصاصی (Custom Paginator) -->
+    @if (pagination && memberParams) {
+      <div class="custom-paginator">
+        <div class="page-size-selector">
+          <label for="pageSize">Items per page:</label>
+          <select id="pageSize" class="custom-input small" (change)="onCustomPageSizeChange($event)">
+            @for (size of pageSizeOptions; track $index) {
+              <option [value]="size" [selected]="size === memberParams.pageSize">{{ size }}</option>
+            }
+          </select>
+        </div>
+        
+        <div class="pagination-controls">
+          <!-- دکمه صفحه قبل -->
+          <button class="btn-page" 
+                  [disabled]="memberParams.pageNumber === 1" 
+                  (click)="onCustomPageChange(memberParams.pageNumber - 1)">
+            Prev
+          </button>
+          
+          <span class="page-info">
+            Page <strong>{{ memberParams.pageNumber }}</strong> of <strong>{{ pagination.totalPages }}</strong>
+          </span>
+          
+          <!-- دکمه صفحه بعد -->
+<button class="btn-page" 
+                  [disabled]="memberParams.pageNumber === pagination.totalPages" 
+                  (click)="onCustomPageChange(memberParams.pageNumber + 1)">
+            Next
+          </button>
+        </div>
+      </div>
+    }
+  </main>
+</section>
+     

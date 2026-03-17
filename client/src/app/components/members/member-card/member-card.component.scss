@@ -1,0 +1,162 @@
+// متغیرهای رنگی (می‌توانید با رنگ‌های پروژه خود جایگزین کنید)
+$color-primary: #3b82f6; // آبی
+$color-warn: #ef4444;    // قرمز
+$color-accent: #10b981;  // سبز
+$text-dark: #1f2937;
+$text-muted: #6b7280;
+
+.member-card {
+  width: 100%;
+  max-width: 280px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden; // جلوگیری از بیرون زدن عکس از لبه‌های گرد
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  
+  // افکت هاور کل کارت
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+
+    .profile-img {
+      transform: scale(1.08); // زوم ملایم عکس
+    }
+
+    .overlay {
+      opacity: 1; // نمایش لایه تاریک روی عکس
+    }
+
+    .action-buttons {
+      opacity: 1;
+      transform: translateY(0); // بالا آمدن دکمه‌ها
+    }
+  }
+}
+
+// ----------------------------------------
+// بخش هدر (شامل تصویر و دکمه‌ها)
+// ----------------------------------------
+.card-header {
+  position: relative;
+  width: 100%;
+  // استفاده از فرمول ریاضی برای حفظ نسبت ابعاد عکس
+  // فرمول: Aspect Ratio = Width / Height
+  aspect-ratio: 1 / 1; 
+  overflow: hidden;
+
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+    
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // جلوگیری از دفرمه شدن عکس
+      transition: transform 0.5s ease;
+    }
+
+    // گرادیانت تیره که روی عکس می‌افتد تا دکمه‌ها خوانا شوند
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  // استایل دکمه‌های شناور
+  .action-buttons {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    
+    // وضعیت پیش‌فرض انیمیشن (مخفی و کمی پایین‌تر)
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); // افکت پرش ملایم
+
+    .btn-action {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, filter 0.2s ease;
+
+      &:hover {
+        transform: scale(1.15);
+        filter: brightness(1.1);
+      }
+
+      // اختصاص رنگ به هر دکمه
+      &.btn-primary { background-color: $color-primary; }
+      &.btn-warn { background-color: $color-warn; }
+      &.btn-accent { background-color: $color-accent; }
+    }
+  }
+}
+
+// ----------------------------------------
+// بخش اطلاعات کاربر (پایین کارت)
+// ----------------------------------------
+.card-body {
+  padding: 16px;
+  cursor: pointer; // نشان دادن اینکه این بخش قابل کلیک است
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f9fafb;
+  }
+
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .username {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $text-dark;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; // سه نقطه شدن متن طولانی
+    }
+
+    .meta-data {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: $text-muted;
+      background-color: #f3f4f6;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+
+      i {
+        color: $color-primary;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

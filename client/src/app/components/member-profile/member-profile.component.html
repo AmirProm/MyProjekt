@@ -58,7 +58,7 @@
           <div class="sub">
             <span>{{ m.city | titlecase }}, {{ m.country | titlecase }}</span>
             <span class="dot">•</span>
-            <span>Last active: {{ m.lastActive | date:'mediumDate' }}</span>
+            <span>Last active: {{ m.lastActive | intlRelativeTime }}</span>
           </div>
 
           @if (m.lookingFor?.trim()) {

@@ -6,12 +6,14 @@ import { environment } from '../../../environments/environment.development';
 import { MemberService } from '../../services/member.service';
 import { AccountService } from '../../services/account.service';
 import { Member } from '../../models/member.model';
+import { IntlModule } from "angular-ecmascript-intl";
+
 
 type LoadState = 'loading' | 'ready' | 'error';
 
 @Component({
   selector: 'app-member-profile',
-  imports: [TitleCasePipe, DatePipe],
+  imports: [TitleCasePipe,IntlModule],
   templateUrl: './member-profile.component.html',
   styleUrls: ['./member-profile.component.scss'],
 })

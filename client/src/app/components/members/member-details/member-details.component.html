@@ -1,0 +1,117 @@
+@if (member) {
+<div class="profile-container">
+  <main class="profile-layout">
+    
+    <!-- بخش چپ: اطلاعات پایه و عکس -->
+    <aside class="left-side card">
+      <div class="photo-wrapper">
+        <!-- مدیریت عکس پروفایل -->
+        @if (member.photos.length > 0) {
+          @for (photo of member.photos; track $index) {
+            @if (photo.isMain) {
+              <img [src]="apiUrl + photo.url_165" priority alt="{{ member.userName }}" class="profile-photo">
+            }
+          }
+        } @else {
+          <img src="member.jpg" alt="Default Profile" class="profile-photo">
+        }
+      </div>
+
+      <!-- وضعیت و جنسیت (استفاده از ایموجی‌های بومی به جای mat-icon) -->
+      <div class="status-badge">
+        <span class="gender-icon">
+          @switch (member.gender) {
+            @case ('female') { 👩 }
+            @case ('male') { 👨 }
+            @default { 👤 }
+          }
+        </span>
+        <span class="status-indicator offline"></span>
+        <span class="status-text">Offline</span>
+      </div>
+
+      <!-- لیست اطلاعات کاربر -->
+      <div class="user-details">
+        <div class="detail-row">
+          <span class="label">Username</span>
+          <span class="value">{{ member.userName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Location</span>
+          <span class="value">{{ member.city }}, {{ member.country }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Age</span>
+          <span class="value">{{ member.age }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Last Active</span>
+          <span class="value">{{ member.lastActive | intlRelativeTime }}</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- بخش راست: تب‌های اختصاصی و محتوا -->
+    <section class="right-side card">
+      <!-- هدر تب‌ها -->
+      <nav class="custom-tabs">
+        <button class="tab-btn" [class.active]="activeTab === 'photos'" (click)="setActiveTab('photos')">Photos</button>
+        <button class="tab-btn" [class.active]="activeTab === 'about'" (click)="setActiveTab('about')">About {{ member.userName }}</button>
+        <button class="tab-btn" [class.active]="activeTab === 'interests'" (click)="setActiveTab('interests')">Interests</button>
+        <button class="tab-btn" [class.active]="activeTab === 'messages'" (click)="setActiveTab('messages')">Messages</button>
+      </nav>
+
+      <!-- محتوای تب‌ها -->
+      <div class="tab-contents">
+        
+        <!-- تب عکس‌ها -->
+        @if (activeTab === 'photos') {
+          <div class="tab-pane fade-in">
+            @if (member.photos.length > 0) {
+              <div class="photo-gallery">
+                @for (photo of member.photos; track $index) {
+                  <img gallerize [src]="apiUrl + photo.url_256" alt="Gallery image" class="gallery-img">
+                }
+              </div>
+            } @else {
+              <div class="empty-state">This member has not shared any photos!</div>
+            }
+          </div>
+        }
+
+        <!-- تب درباره -->
+        @if (activeTab === 'about') {
+          <div class="tab-pane fade-in">
+            <div class="content-block">
+              <h2>Introduction</h2>
+              <!-- ترفند کد تمیز: حذف if/else های طولانی با استفاده از عملگر || -->
+              <p>{{ member.introduction || 'Introduction is empty!' }}</p>
+            </div>
+            <div class="content-block">
+              <h2>Looking For</h2>
+              <p>{{ member.lookingFor || 'LookingFor is empty!' }}</p>
+            </div>
+          </div>
+        }
+
+        <!-- تب علایق -->
+        @if (activeTab === 'interests') {
+          <div class="tab-pane fade-in">
+            <div class="content-block">
+              <h2>Interests</h2>
+              <p>{{ member.interests || 'Interests is empty!' }}</p>
+            </div>
+          </div>
+        }
+<!-- تب پیام‌ها -->
+        @if (activeTab === 'messages') {
+          <div class="tab-pane fade-in">
+            <div class="empty-state">Messages will be displayed here.</div>
+          </div>
+        }
+
+      </div>
+    </section>
+  </main>
+</div>
+}

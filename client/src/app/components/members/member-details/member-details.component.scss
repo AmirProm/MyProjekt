@@ -1,0 +1,280 @@
+// متغیرهای رنگی مینیمال
+$primary: #0f172a; // تیره و مدرن برای المان‌های اصلی
+$primary-light: #334155;
+$bg-body: #f8fafc;
+$bg-card: #ffffff;
+$border-light: #e2e8f0;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$offline-color: #94a3b8;
+
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+// چیدمان اصلی (Grid)
+.profile-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
+
+    // ریسپانسیو برای موبایل و تبلت
+    @media (max-width: 868px) {
+        grid-template-columns: 1fr; // ستون‌ها زیر هم می‌روند
+    }
+}
+
+// استایل مشترک کارت‌ها (Card)
+.card {
+    background: $bg-card;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba($border-light, 0.5);
+    overflow: hidden;
+}
+
+// ==========================================
+// استایل سایدبار چپ (Left Side)
+// ==========================================
+.left-side {
+    padding: 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .photo-wrapper {
+        position: relative;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .profile-photo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid $bg-card;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+
+    // نشانگر وضعیت
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: $bg-body;
+        padding: 8px 16px;
+        border-radius: 30px;
+        margin: 0 auto;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $text-muted;
+
+        .gender-icon {
+            font-size: 1.2rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+
+            &.offline {
+                background-color: $offline-color;
+            }
+
+            &.online {
+                background-color: #22c55e;
+            }
+
+            // در صورت نیاز برای آنلاین
+        }
+    }
+
+    // لیست مشخصات
+    .user-details {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        text-align: left;
+        margin-top: 8px;
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid $border-light;
+
+            &:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .label {
+                color: $text-muted;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+
+            .value {
+                color: $text-main;
+                font-weight: 600;
+                font-size: 0.95rem;
+            }
+        }
+    }
+}
+
+// ==========================================
+// استایل بخش راست و تب‌ها (Right Side)
+// ==========================================
+.right-side {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    // هدر تب‌ها
+    .custom-tabs {
+        display: flex;
+        border-bottom: 1px solid $border-light;
+        padding: 0 16px;
+        overflow-x: auto; // اسکرول افقی در موبایل برای تب‌ها
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .tab-btn {
+        background: transparent;
+        border: none;
+        padding: 20px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text-muted;
+        cursor: pointer;
+        position: relative;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+
+        // افکت خط زیر تب فعال
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: $primary;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            border-radius: 3px 3px 0 0;
+        }
+
+        &:hover {
+            color: $text-main;
+        }
+
+        &.active {
+            color: $primary;
+
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    // محتوای تب‌ها
+    .tab-contents {
+        padding: 32px;
+        flex: 1;
+
+        @media (max-width: 600px) {
+            padding: 24px 16px;
+        }
+    }
+
+    .content-block {
+        margin-bottom: 32px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            color: $text-main;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        p {
+            color: $text-muted;
+            line-height: 1.7;
+            font-size: 1rem;
+            margin: 0;
+        }
+    }
+
+    // گالری عکس
+    .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    // پیام خالی بودن تب
+    .empty-state {
+        text-align: center;
+        padding: 64px 20px;
+        color: $text-muted;
+        font-size: 1.1rem;
+        background: $bg-body;
+        border-radius: 16px;
+        border: 1px dashed $border-light;
+    }
+}
+
+// انیمیشن محو شدن هنگام تغییر تب
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

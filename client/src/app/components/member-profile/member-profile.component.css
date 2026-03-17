@@ -182,8 +182,7 @@
   background: rgba(255, 255, 255, 0.84);
   border: 1px solid rgba(226, 232, 240, 0.95);
   box-shadow: 0 18px 60px rgba(2, 6, 23, 0.1);
-  -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 14px;
@@ -291,8 +290,7 @@
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(226, 232, 240, 0.95);
   box-shadow: 0 14px 44px rgba(2, 6, 23, 0.06);
-  -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .panelHead h2 {
@@ -479,8 +477,7 @@
   position: fixed;
   inset: 0;
   background: rgba(2, 6, 23, 0.58);
-  -webkit-backdrop-filter: blur(6px);
-          backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
   z-index: 999;
