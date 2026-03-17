@@ -26,7 +26,7 @@ export class AccountService {
         if (res) {
           this.setCurrentUser(res);
 
-          this.router.navigateByUrl('dashboard');
+          this.router.navigateByUrl('terms');
 
           return res;
         }
@@ -59,7 +59,7 @@ export class AccountService {
             this.router.navigateByUrl('admin');
           }
           else {
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('');
           }
 
           return res;
@@ -126,4 +126,5 @@ export class AccountService {
 
     this.router.navigateByUrl('account/login');
   }
+
 }
