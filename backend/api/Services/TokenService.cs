@@ -57,4 +57,12 @@ public class TokenService : ITokenService
 
         return tokenHandler.WriteToken(token);
     }
+
+    public async Task<ObjectId?> GetActualUserId(string? userIdHashed, CancellationToken cancellationToken) =>
+        string.IsNullOrEmpty(userIdHashed)
+        ? null
+        : await _collection.AsQueryable()
+            .Where(appUser => appUser.IdentifierHash == userIdHashed)
+            .Select(appUser => appUser.Id)
+            .SingleOrDefaultAsync(cancellationToken);
 }
