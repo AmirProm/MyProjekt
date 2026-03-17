@@ -8,26 +8,14 @@
 
         <form class="auth-form" [formGroup]="registerFg">
             <!-- Gender -->
-            <!-- <div class="auth-field auth-field-gender">
-                <label class="auth-label">I am a</label>
-                <div class="auth-gender-group">
-                    <button type="button" class="auth-gender-chip" [class.active]="GenderCtrl.value === 'female'"
-                        (click)="GenderCtrl.setValue('female')">
-                        Female
-                    </button>
-                    <button type="button" class="auth-gender-chip" [class.active]="GenderCtrl.value === 'male'"
-                        (click)="GenderCtrl.setValue('male')">
-                        Male
-                    </button>
-                    <button type="button" class="auth-gender-chip" [class.active]="GenderCtrl.value === 'other'"
-                        (click)="GenderCtrl.setValue('other')">
-                        Other
-                    </button>
-                </div>
-                <mat-error *ngIf="GenderCtrl.touched && GenderCtrl.hasError('required')">
-                    Please select your gender.
-                </mat-error>
-            </div> -->
+            <div class="gender">
+                <strong>I am a</strong>
+                <mat-radio-group [formControl]="GenderCtrl" aria-label="Select your gender" color="primary">
+                    <mat-radio-button value="female">Female</mat-radio-button>
+                    <mat-radio-button value="male">Male</mat-radio-button>
+                    <mat-radio-button value="other">Other</mat-radio-button>
+                </mat-radio-group>
+            </div>
 
             <!-- Email -->
             <mat-form-field appearance="outline" class="auth-field">
@@ -56,7 +44,7 @@
             <mat-form-field appearance="outline" class="auth-field">
                 <mat-label>Password</mat-label>
                 <input matInput type="password" [formControl]="PasswordCtrl" placeholder="••••••••" />
-                <mat-hint>Between 1 to 30 characters.</mat-hint>
+                <mat-hint>Between 8 to 30 characters.</mat-hint>
                 @if (PasswordCtrl.hasError('required')) {
                 <mat-error>This field is required.</mat-error>
                 }
@@ -98,8 +86,7 @@
                 }
             </mat-form-field>
 
-            <button (click)="register()"  mat-flat-button color="parimary"
-                [disabled]="registerFg.invalid">
+            <button (click)="register()" mat-flat-button color="parimary" [disabled]="registerFg.invalid">
                 Sign up
             </button>
 

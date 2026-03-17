@@ -6,17 +6,19 @@ import { RegisterUser } from '../../../models/register-user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     FormsModule, ReactiveFormsModule,
-    MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule , MatStepperModule , RouterLink
+    MatButtonModule, MatFormFieldModule, MatRadioModule, MatInputModule, MatDatepickerModule, MatStepperModule, RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -45,14 +47,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   //#region registerFg 
   registerFg = this.fB.group({
-    emailCtrl: ['', [Validators.required, Validators.email]],
-    userNameCtrl: '',
-    passwordCtrl: '',
-    confirmPasswordCtrl: '',
+    genderCtrl: ['female', [Validators.required]],
+    emailCtrl: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,5})+)$/)]],
+    userNameCtrl: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
+    passwordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+    confirmPasswordCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
     dateOfBirthCtrl: ['', [Validators.required]],
-    genderCtrl: '',
-    cityCtrl: '',
-    countryCtrl: ''
   });
 
   get EmailCtrl(): FormControl {
@@ -62,6 +62,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   get UserNameCtrl(): FormControl {
     return this.registerFg.get('userNameCtrl') as FormControl;
   }
+
+  get GenderCtrl(): FormControl {
+    return this.registerFg.get('genderCtrl') as FormControl;
+  }
+
 
   get PasswordCtrl(): FormControl {
     return this.registerFg.get('passwordCtrl') as FormControl;
@@ -84,6 +89,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         email: this.EmailCtrl.value,
         userName: this.UserNameCtrl.value,
         password: this.PasswordCtrl.value,
+        gender: this.GenderCtrl.value,
         confirmPassword: this.ConfirmPasswordCtrl.value,
         dateOfBirth: dob,
       }
@@ -110,29 +116,29 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // gets the first 10 chars from this date YYYY-MM-DDTHH:mm:ss.sssZ the output is YYYY-MM-DD
   }
 
-  sliceString(): void {
-    let fullName: string = "Amir"
+  // sliceString(): void {
+  //   let fullName: string = "Amirm safa"
 
-    let name: string = fullName.slice(0, 5);
+  //   let name: string = fullName.slice(0, 5);
 
-    console.log(name);
-  }
+  //   console.log(name);
+  // }
 
-  getYear(): void {
-    let dobString = this.DateOfBirthCtrl.value;
+  // getYear(): void {
+  //   let dobString = this.DateOfBirthCtrl.value;
 
-    let dateObj = new Date(dobString);
+  //   let dateObj = new Date(dobString);
 
-    let dateObjUtc = dateObj.setMinutes(dateObj.getMinutes() - dateObj.getTimezoneOffset());
+  //   let dateObjUtc = dateObj.setMinutes(dateObj.getMinutes() - dateObj.getTimezoneOffset());
 
-    let isoString = dateObj.toISOString();
+  //   let isoString = dateObj.toISOString();
 
-    let dateOnly = isoString.slice(0, 10);
+  //   let dateOnly = isoString.slice(0, 10);
 
-    console.log('1', dobString);
-    console.log('2', dateObj);
-    console.log('3', dateObjUtc);
-    console.log('4', isoString);
-    console.log('5', dateOnly);
-  }
+  //   console.log('1', dobString);
+  //   console.log('2', dateObj);
+  //   console.log('3', dateObjUtc);
+  //   console.log('4', isoString);
+  //   console.log('5', dateOnly);
+  // }
 }

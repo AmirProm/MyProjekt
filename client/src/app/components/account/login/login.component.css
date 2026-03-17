@@ -13,8 +13,7 @@
   padding: 28px 26px 26px;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.78);
-  -webkit-backdrop-filter: blur(18px);
-          backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   box-shadow: 0 35px 60px rgba(15, 23, 42, 0.18);
   border: 1px solid rgba(148, 163, 184, 0.35);
   animation: auth-fade-in 0.35s ease-out;
