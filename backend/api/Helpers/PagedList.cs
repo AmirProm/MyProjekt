@@ -12,14 +12,15 @@ public class PagedList<T> : List<T>
         CurrentPage = pageNumber;
         TotalPages = (int)Math.Ceiling(itemsCount / (double)pageSize); // 10 items, 3 pageSize => 4 total pages
         PageSize = pageSize;
-        TotalItems = itemsCount;
+        TotalItemsCount = itemsCount;
         AddRange(items);
     }
-    
-    public int CurrentPage { get; private set; } 
+
+    public int CurrentPage { get; private set; }
     public int TotalPages { get; private set; }
     public int PageSize { get; private set; }
-    public int TotalItems { get; private set; }
+    public int TotalItemsCount { get; set; }
+
 
     /// <summary>
     /// Call MongoDB collection and get a limited number of items based on the pageSize and pageNumber.
