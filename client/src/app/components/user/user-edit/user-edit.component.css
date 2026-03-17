@@ -33,8 +33,7 @@
   justify-content: space-between;
   gap: 0.9rem;
   align-items: center;
-  -webkit-backdrop-filter: blur(6px);
-          backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .profile-header-left {
