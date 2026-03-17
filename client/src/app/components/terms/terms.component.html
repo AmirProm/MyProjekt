@@ -1,0 +1,47 @@
+<div class="terms-page">
+    <div class="terms-box">
+        <h1>Terms & Community Guidelines</h1>
+
+        <p class="intro">
+            Please read these Terms & Community Guidelines carefully before using Synq.
+        </p>
+
+        <ul class="terms-list">
+            <li>Users must respect the rights, privacy, and dignity of others.</li>
+            <li>Hate speech, harassment, or threats are strictly prohibited.</li>
+            <li>Illegal, violent, or extremist content is not allowed.</li>
+            <li>Sexually explicit or obscene material is forbidden.</li>
+            <li>Users are responsible for all posted content.</li>
+            <li>Impersonation or identity misuse is prohibited.</li>
+            <li>Copyright violations are not permitted.</li>
+            <li>Spam, scams, or misleading links are forbidden.</li>
+            <li>Users must respect the rights, privacy, and dignity of others.</li>
+            <li>Hate speech, harassment, bullying, or threats are strictly prohibited.</li>
+            <li>Content promoting violence, terrorism, or illegal activities is not allowed.</li>
+            <li>Sexually explicit, pornographic, or obscene content is forbidden.</li>
+            <li>Users are fully responsible for the content they post or share.</li>
+            <li>Impersonation of individuals, brands, or organizations is prohibited.</li>
+            <li>Posting copyrighted material without authorization is not permitted.</li>
+            <li>Spam, phishing, scams, or misleading links are strictly forbidden.</li>
+            <li>Use of bots, automation, or abuse of system features is not allowed.</li>
+            <li>Collection or sharing of personal data without consent is prohibited.</li>
+            <li>Accounts may be suspended or terminated for violations.</li>
+            <li>Synq reserves the right to remove content at its sole discretion.</li>
+            <li>Users must comply with applicable local, national, and international laws.</li>
+            <li>Any attempt to harm the platform or its users will result in legal action.</li>
+            <li>Continued use of the app indicates acceptance of future updates to these terms.</li>
+            <li>Personal data sharing without consent is prohibited.</li>
+            <li>Synq may suspend or terminate violating accounts.</li>
+            <li>All users must comply with local and international laws.</li>
+        </ul>
+
+        <label class="accept-terms">
+            <input type="checkbox" [checked]="accepted" (change)="onAcceptChange($event)" />
+            <span>I agree to the Terms & Community Guidelines</span>
+        </label>
+
+        <button class="accept-btn" [disabled]="!accepted" (click)="acceptTerms()">
+            Accept & Continue
+        </button>
+    </div>
+</div>
