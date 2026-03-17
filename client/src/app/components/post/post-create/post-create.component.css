@@ -1,0 +1,56 @@
+.create-post {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 400px;
+  margin-left: 40px;
+  margin-right: 30px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.create-post textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  line-height: 1.5;
+  font-family: inherit;
+}
+.create-post textarea::-moz-placeholder {
+  color: #9aa0a6;
+}
+.create-post textarea::placeholder {
+  color: #9aa0a6;
+}
+.create-post .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.create-post .post-btn {
+  background: #009a74;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.create-post .post-btn:hover {
+  background: #009a74;
+  transform: translateY(-1px);
+}
+.create-post .post-btn:active {
+  transform: translateY(0);
+}
+.create-post .post-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}/*# sourceMappingURL=post-create.component.css.map */
