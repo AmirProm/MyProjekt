@@ -24,4 +24,10 @@ public class ChatRepository : IChatRepository
     {
         return await _collection.Find(_ => true).ToListAsync();
     }
+
+     public async Task<bool> DeletMassageAsync(string messageId)
+    {
+        var result = await _collection.DeleteOneAsync(x => x.Id == messageId);
+        return result.DeletedCount > 0;
+    }
 }
