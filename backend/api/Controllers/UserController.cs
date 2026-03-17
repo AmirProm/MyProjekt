@@ -29,7 +29,7 @@ public class UserController(IUserRepository userRepository) : BaseApiController
 
     [HttpPost("add-photo")]
     public async Task<ActionResult<Photo>> AddPhoto(
-        [AllowedFileExtensions, FileSize(250_000, 4_000_000)]
+        [AllowedFileExtensions, FileSize(100_000, 4_000_000)]
         IFormFile file, CancellationToken cancellationToken
     )
     {
