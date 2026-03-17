@@ -1,0 +1,83 @@
+.feed {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-card {
+    border-bottom: 1px solid #e6ecf0;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-card:hover {
+    background: #f7f9f9;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #d9d9d9;
+    flex-shrink: 0;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 15px;
+    color: #0f1419;
+}
+
+.post-time {
+    font-size: 13px;
+    color: #536471;
+}
+
+.post-content {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #0f1419;
+    word-break: break-word;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    max-width: 420px;
+    margin-top: 6px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #536471;
+    font-size: 13px;
+    padding: 6px;
+    border-radius: 20px;
+    transition: background 0.2s;
+}
+
+.action:hover {
+    background: #f0f3f4;
+}
+
+.action svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+} 

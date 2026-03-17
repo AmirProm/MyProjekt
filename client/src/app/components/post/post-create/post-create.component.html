@@ -1,0 +1,20 @@
+<div class="create-post">
+
+<textarea
+[(ngModel)]="caption"
+placeholder="What's on your mind?">
+</textarea>
+
+<div class="actions">
+  <span></span>
+
+  <button
+  class="post-btn"
+  (click)="create()"
+  [disabled]="!caption.trim()">
+
+  Post
+  </button>
+</div>
+
+</div>

@@ -1,0 +1,55 @@
+<div class="feed">
+
+    <div class="post-card" *ngFor="let post of posts">
+
+        <div class="post-header">
+            <div class="avatar"></div>
+
+            <div>
+                <span class="username">{{post.userName}}</span>
+                <span class="post-time"> {{post.createdAt}}</span>
+              </div>
+          </div>
+
+        <div class="post-content">
+            {{post.caption}}
+          </div>
+
+        <div class="post-actions">
+
+            <button class="action">
+                <svg viewBox="0 0 24 24">
+                   
+          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
+                 
+        </svg>
+                14
+              </button>
+
+            <button class="action">
+                <svg viewBox="0 0 24 24">
+                   
+          <path
+            d="M12 21s-6-4.35-9-8.28C-1 7 3 2 7.5 4.5 9 5.3 10 6.6 12 8c2-1.4 3-2.7 4.5-3.5C21 2 25 7 21 12.72 18 16.65 12 21 12 21z" />
+                 
+        </svg>
+                32
+              </button>
+
+            <button class="action">
+                <svg viewBox="0 0 24 24">
+                   
+          <path d="M4 12v7a1 1 0 0 0 1 1h14" />
+                   
+          <path d="M16 6l4 4-4 4" />
+                   
+          <path d="M20 10H9" />
+                 
+        </svg>
+              </button>
+
+          </div>
+
+      </div>
+
+</div>
