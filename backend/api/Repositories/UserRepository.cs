@@ -30,6 +30,19 @@ public class UserRepository : IUserRepository
         return appUser;
     }
 
+    public async Task<ObjectId?> GetIdByUserNameAsync(string userName, CancellationToken cancellationToken) =>
+         await _collection.AsQueryable<AppUser>()
+            .Where(appUser => appUser.NormalizedUserName == userName.ToUpper().Trim())
+            .Select(appUser => appUser.Id)
+            .FirstOrDefaultAsync(cancellationToken);
+
+    public async Task<string?> GetKnownAsByUserNameAsync(string userName, CancellationToken cancellationToken) =>
+await _collection.AsQueryable<AppUser>()
+    .Where(appUser => appUser.NormalizedUserName == userName.ToUpper().Trim())
+    .Select(appUser => appUser.KnownAs)
+    .FirstOrDefaultAsync(cancellationToken);
+
+
     public async Task<UpdateResult> UpdateByIdAsync(string userId, UserUpdateDto userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
