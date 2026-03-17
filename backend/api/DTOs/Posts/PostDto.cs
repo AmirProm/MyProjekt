@@ -1,10 +1,12 @@
-namespace API.DTOs;
+namespace api.DTOs.Posts;
 
 public class PostDto
 {
-    public string Id { get; set; } = null!;
+    public string Id { get; set; }
+
     public string UserName { get; set; } = null!;
-    public string Caption { get; set; } = string.Empty;
-    public string PhotoUrl { get; set; } = string.Empty;
+
+    public string Caption { get; set; } = null!;
+
     public DateTime CreatedAt { get; set; }
 }
