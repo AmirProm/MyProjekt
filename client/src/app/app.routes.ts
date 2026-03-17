@@ -15,7 +15,12 @@ import { ExploreComponent } from './components/explor/explor.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MemberProfileComponent } from './components/member-profile/member-profile.component';
+import { MemberListComponent } from './components/members/member-list/member-list.component';
+import { MemberDetailsComponent } from './components/members/member-details/member-details.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { termsComponent } from './components/terms/terms.component';
+import { PostCreateComponent } from './components/post/post-create/post-create.component';
+import { PostFeedComponent } from './components/post/post-feed/post-feed.component';
 
 export const routes: Routes = [
     {
@@ -27,10 +32,15 @@ export const routes: Routes = [
             { path: '', component: DashboardComponent },
             { path: 'members/:username', component: MemberProfileComponent },
             { path: 'user/user-edit', component: UserEditComponent },
+            { path: 'terms', component: termsComponent },
             { path: 'no-access', component: NoAccessComponent },
             { path: 'settings', component: SettingComponent },
             { path: 'admin', component: AdminPanelComponent },
-            { path: 'explor', component: ExploreComponent },
+            // { path: 'explor', component: ExploreComponent },
+            { path: 'members', component: MemberListComponent },
+            { path: "explor", component: PostFeedComponent },
+            { path: 'post', component: PostCreateComponent },
+            { path: 'member-details/:userName', component: MemberDetailsComponent },
             { path: 'chat', component: Chat },
         ]
     },
@@ -45,6 +55,8 @@ export const routes: Routes = [
 
         ]
     },
+
+
     { path: 'home', component: HomeGuestComponent },
     { path: 'navbar', component: NavbarComponent },
     { path: 'footer', component: FooterComponent },

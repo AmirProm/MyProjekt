@@ -11,9 +11,10 @@
   color: #ffffff;
 }
 
-.loader:before, .loader:after {
+.loader:before,
+.loader:after {
   content: "";
-  color: #0ea5e9;
+  color: #007457;
   display: block;
   width: 15px;
   height: 15px;
