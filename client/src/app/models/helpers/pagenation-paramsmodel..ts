@@ -2,9 +2,9 @@ export class PaginationParams {
   pageNumber = 1;
   pageSize = 12;
 
-  constructor(init?: Partial<PaginationParams>) {
-    Object.assign(this, init);
-  }
+  // constructor(init?: Partial<PaginationParams>) {
+  //   Object.assign(this, init);
+  // }
 }
 
 // export interface PagedState<T> {
