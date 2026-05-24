@@ -1,110 +1,77 @@
-***
-
-markdown
-# 🌐 Synq — Real-time Social Platform
-
-<div align="center">
-
-[⚡ High Performance] • [🚀 Real-time Communication] • [🎨 Minimalist UI]
-
-![GitHub License](https://img.shields.io/github/license/amirali-safaee/synq?style=for-the-badge)
-![Angular Version](https://img.shields.io/badge/Angular-19-red?style=for-the-badge&logo=angular)
-![.NET Version](https://img.shields.io/badge/.NET-8.0-blue?style=for-the-badge&logo=dotnet)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![SignalR](https://img.shields.io/badge/SignalR-000000?style=for-the-badge&logo=signalr)
-
-*A distraction-free, modern social experience built for speed.*
-
-</div>
-
----
-
-## 💡 Overview
-Synq is a high-performance, modern social platform engineered to eliminate digital noise. By focusing on real-time interactions and a clean, minimalist UI, Synq provides a seamless environment for users to connect, share, and engage.
-
-## 🏗 Architecture
-The application leverages a robust, decoupled architecture designed for scalability and low-latency communication.
-
-
-mermaid
-graph LR
-    A[Client - Angular 19] -- WebSocket/SignalR --> B(ASP.NET Core API)
-    B -- Driver/LINQ --> C[(MongoDB)]
-    B -- Identity --> D[Auth System]
-
-
-## ✨ Key Capabilities
-
-| Feature | Technology | Benefit |
-| :--- | :--- | :--- |
-| Real-time Messaging | SignalR | Instantaneous, low-latency communication |
-| Minimalist Feed | Angular Material | Distraction-free, clean UX |
-| Identity | Microsoft Identity | Secure and robust authentication |
-| Data Engine | MongoDB | Highly flexible and scalable data storage |
-
----
-
-## 🖼 Preview
-*(Add your image links below)*
-
-| Dashboard Overview | Profile Interface |
-| :---: | :---: |
-| ![Dashboard](https://github.com/AmirProm/Synq/blob/main/screanshot%2FDashboard.png) | ![Profile](./screenshots/profile.png) |
-
----
-
-## 🚀 Getting Started
-
-### 1. Prerequisites
-Ensure you have the following installed:
-- Node.js: v18+
-- .NET SDK: v8+
-- MongoDB: (Local instance or MongoDB Atlas)
-
-### 2. Backend Setup
-
-bash
-cd API
-dotnet restore
-# Configure your connection string in appsettings.json
-dotnet run
-
-
-### 3. Frontend Setup
-
-bash
-cd client
-npm install
-ng serve --open
-
-
----
-
-## 🗺 Roadmap
-- [ ] ❤️ Interactions: Implement post likes and threaded comments.
-- [ ] 🔔 Notifications: Real-time push alerts for user activity.
-- [ ] 👥 Networking: Full follow/followers system.
-- [ ] 🌙 Theming: Integrated Dark Mode support.
-
----
-
-## 🤝 Contributing
-Contributions are what make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add: AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-This project is licensed under the MIT License.
-
 <p align="center">
-Developed with ❤️ by <b>Amirali Safaee</b>
+  <img src="https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular 19" />
+  <img src="https://img.shields.io/badge/.NET-8-512BD4?style=for-the-badge&logo=.net&logoColor=white" alt=".NET 8" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/SignalR-5C2D91?style=for-the-badge&logo=dotnet&logoColor=white" alt="SignalR" />
 </p>
 
+<h1 align="center">Synq</h1>
 
-***
+<p align="center">
+  <b>A real-time social platform engineered for clarity, speed, and low-noise interaction.</b>
+</p>
+
+<p align="center">
+  Synq is built around a simple idea: modern social products should feel instantaneous, lightweight, and focused.
+  It combines a minimalist client, a decoupled backend, secure authentication, and real-time chat to create a clean interaction layer for online communication.
+</p>
+
+<p align="center">
+  <a href="#architecture">Architecture</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#tech-stack">Tech Stack</a> ·
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#roadmap">Roadmap</a> ·
+  <a href="#contributing">Contributing</a>
+</p>
+
+---
+
+## Why Synq Exists
+
+Most social platforms accumulate noise faster than value:
+- too many surfaces,
+- too many interruptions,
+- too much visual clutter,
+- too much latency between action and response.
+
+**Synq is the opposite of that.**
+
+It is designed to prioritize:
+- **real-time communication**
+- **minimalist user experience**
+- **fast feedback loops**
+- **clean separation between client, API, and persistence**
+- **secure authentication with token refresh support**
+
+The result is a platform that feels direct, responsive, and intentionally reduced to the interactions that matter.
+
+---
+
+## Core Product Philosophy
+
+Synq is not trying to be “everything.”
+
+It is intentionally focused on:
+- **chat-first interaction**
+- **clean, low-distraction UI**
+- **predictable backend boundaries**
+- **scalable data persistence**
+- **a foundation suitable for team-driven evolution**
+
+This makes the project useful both as:
+1. a practical social app, and  
+2. a strong engineering base for future features, hosting, collaboration, and platform growth.
+
+---
+
+## Architecture
+
+Synq follows a decoupled client-server design:
+```mermaid
+graph LR
+UI[Angular 19 Client] -->|HTTP / SignalR| API[ASP.NET Core API]
+API -->|Queries / Commands| DB[(MongoDB)]
+API -->|Authentication / Refresh Tokens| AUTH[Identity Layer]
+UI -->|Real-time Chat| HUB[SignalR Hub]
+HUB --> API
