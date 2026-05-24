@@ -1,3 +1,6 @@
+***
+
+```markdown
 # Synq ⚡
 
 [![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev/)
@@ -15,32 +18,33 @@ Designed for scalability from day one, Synq acts as a robust foundation for ente
 ## 📐 System Architecture
 
 The following diagram illustrates the high-level data flow and system boundaries of the Synq platform. It highlights the separation between the client infrastructure, the application API, and the persistence/real-time layers.
+
 ```mermaid
 graph TD
-Client[Angular 19 SPA] -->|HTTPS/REST| API[".NET 8 API (Clean Architecture)"]
-Client -->|WebSockets/WSS| SignalR[SignalR Hub]
-
-API -->|CQRS| ApplicationLayer[Application Layer]
-ApplicationLayer -->|Entity Framework Core / Driver| DB[(MongoDB)]
-
-SignalR -->|Pub/Sub| MessageBus((Redis Backplane*))
-MessageBus -.-> DB
-
-subgraph Infrastructure
-DB
-MessageBus
-end
-
-subgraph Core
-API
-ApplicationLayer
-SignalR
-end
-
-classDef primary fill:#0078D4,stroke:#fff,stroke-width:2px,color:#fff;
-classDef secondary fill:#4EA94B,stroke:#fff,stroke-width:2px,color:#fff;
-class Client,API,SignalR primary;
-class DB,MessageBus secondary;
+    Client[Angular 19 SPA] -->|HTTPS/REST| API[".NET 8 API (Clean Architecture)"]
+    Client -->|WebSockets/WSS| SignalR[SignalR Hub]
+    
+    API -->|CQRS| ApplicationLayer[Application Layer]
+    ApplicationLayer -->|Entity Framework Core / Driver| DB[(MongoDB)]
+    
+    SignalR -->|Pub/Sub| MessageBus((Redis Backplane*))
+    MessageBus -.-> DB
+    
+    subgraph Infrastructure
+        DB
+        MessageBus
+    end
+    
+    subgraph Core
+        API
+        ApplicationLayer
+        SignalR
+    end
+    
+    classDef primary fill:#0078D4,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef secondary fill:#4EA94B,stroke:#fff,stroke-width:2px,color:#fff;
+    class Client,API,SignalR primary;
+    class DB,MessageBus secondary;
 *\*Redis Backplane mapped for horizontal scaling phase.*
 
 ## 🛠 Technical Deep-Dive
@@ -82,7 +86,36 @@ The codebase strictly adheres to industry-standard software design patterns:
 ### Local Development Environment
 
 1. **Clone the repository:**
-   
-```bash
+   ```bash
    git clone https://github.com/AmirProm/Synq.git
    cd Synq
+   ```
+
+2. **Spin up Infrastructure (MongoDB):**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Run the Backend (.NET API):**
+   ```bash
+   cd src/Synq.Api
+   dotnet restore
+   dotnet run
+   ```
+
+4. **Run the Frontend (Angular):**
+   ```bash
+   cd src/Synq.Client
+   npm install
+   ng serve
+   ```
+
+## 🗺 System Evolution (Roadmap)
+
+- [ ] **Phase 1: Core Architecture** - Clean Architecture setup, JWT Auth, basic real-time messaging. *(Current)*
+- [ ] **Phase 2: Reliability & Persistence** - Advanced MongoDB indexing, message pagination, offline synchronization.
+- [ ] **Phase 3: CI/CD Pipeline** - GitHub Actions for automated unit testing (xUnit/Karma) and SonarQube static code analysis.
+- [ ] **Phase 4: Production Readiness** - Dockerization of the API and Client, NGINX reverse proxy setup, and Redis Backplane integration for scale.
+
+---
+*Engineered by [AmirProm](https://github.com/AmirProm).*
