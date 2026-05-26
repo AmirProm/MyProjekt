@@ -1,121 +1,109 @@
 ***
 
-```markdown
-# Synq ⚡
+# 🌐 Synq — Real-time Social Platform
 
-[![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev/)
-[![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![SignalR](https://img.shields.io/badge/SignalR-RealTime-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://dotnet.microsoft.com/en-us/apps/aspnet/signalr)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+<div align="center">
 
-## 📌 Executive Summary
+[⚡ High Performance] • [🚀 Real-time Communication] • [🎨 Minimalist UI]
 
-**Synq** is a high-performance, distributed real-time communication platform engineered to deliver low-latency messaging and seamless user collaboration. Built with a focus on modern software engineering paradigms, the system leverages a decoupled architecture, ensuring strict segregation of duties between the presentation layer and the core domain logic. 
+![GitHub License](https://img.shields.io/github/license/amirali-safaee/synq?style=for-the-badge)
+![Angular Version](https://img.shields.io/badge/Angular-19-red?style=for-the-badge&logo=angular)
+![.NET Version](https://img.shields.io/badge/.NET-8.0-blue?style=for-the-badge&logo=dotnet)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![SignalR](https://img.shields.io/badge/SignalR-000000?style=for-the-badge&logo=signalr)
 
-Designed for scalability from day one, Synq acts as a robust foundation for enterprise-grade chat and synchronization services.
+*A distraction-free, modern social experience built for speed.*
 
-## 📐 System Architecture
-
-The following diagram illustrates the high-level data flow and system boundaries of the Synq platform. It highlights the separation between the client infrastructure, the application API, and the persistence/real-time layers.
-
-```mermaid
-graph TD
-    Client[Angular 19 SPA] -->|HTTPS/REST| API[".NET 8 API (Clean Architecture)"]
-    Client -->|WebSockets/WSS| SignalR[SignalR Hub]
-    
-    API -->|CQRS| ApplicationLayer[Application Layer]
-    ApplicationLayer -->|Entity Framework Core / Driver| DB[(MongoDB)]
-    
-    SignalR -->|Pub/Sub| MessageBus((Redis Backplane*))
-    MessageBus -.-> DB
-    
-    subgraph Infrastructure
-        DB
-        MessageBus
-    end
-    
-    subgraph Core
-        API
-        ApplicationLayer
-        SignalR
-    end
-    
-    classDef primary fill:#0078D4,stroke:#fff,stroke-width:2px,color:#fff;
-    classDef secondary fill:#4EA94B,stroke:#fff,stroke-width:2px,color:#fff;
-    class Client,API,SignalR primary;
-    class DB,MessageBus secondary;
-*\*Redis Backplane mapped for horizontal scaling phase.*
-
-## 🛠 Technical Deep-Dive
-
-The technology stack was selected based on strict criteria regarding performance, maintainability, and developer ergonomics:
-
-| Component | Technology | Engineering Rationale |
-| :--- | :--- | :--- |
-| **Frontend** | Angular 19 | Utilizing standalone components and Signals for highly optimized, zone-less change detection and superior rendering performance. |
-| **Backend API** | .NET 8 (C#) | Chosen for its best-in-class JIT/AOT performance, robust memory management, and extensive enterprise ecosystem. |
-| **Persistence** | MongoDB | A NoSQL document model provides the high-write-throughput and schema flexibility required for fast-evolving chat and event data. |
-| **Real-time** | ASP.NET Core SignalR | Abstracts underlying transport mechanisms (WebSockets, Server-Sent Events, Long Polling) providing a resilient real-time duplex channel. |
-
-## 🛡 Security & Scalability
-
-### Authentication & Session Management
-- **Stateless Authentication:** Implements stateless JWT (JSON Web Tokens) for API authorization.
-- **Refresh Token Rotation:** Mitigates the risk of compromised access tokens by employing short-lived JWTs alongside secure, HTTP-only refresh tokens stored securely on the client.
-- **Hub Security:** SignalR endpoints are secured using bearer tokens passed via connection protocols, ensuring real-time streams are authenticated at the handshake level.
-
-### Scalability Strategy
-- **Horizontal Scaling:** The backend is stateless, allowing seamless horizontal scaling behind a reverse proxy/load balancer.
-- **Real-time Distribution:** Future-proofed for a Redis Backplane to synchronize SignalR messages across multiple server nodes, preventing WebSocket connection bottlenecks.
-
-## ⚙️ Engineering Principles
-
-The codebase strictly adheres to industry-standard software design patterns:
-1. **Clean Architecture:** Strict dependency rules. Domain entities have zero knowledge of infrastructure or presentation concerns.
-2. **SOLID Principles:** Interfaces are segregated, and dependencies are injected, ensuring high testability.
-3. **CQRS (Command Query Responsibility Segregation):** Read and write operations are logically separated, paving the way for targeted optimizations and potential event sourcing.
-
-## 🚀 Setup & Infrastructure
-
-### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Node.js (v20+)](https://nodejs.org/) & Angular CLI
-- [Docker & Docker Compose](https://www.docker.com/) (for infrastructure)
-
-### Local Development Environment
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/AmirProm/Synq.git
-   cd Synq
-   ```
-
-2. **Spin up Infrastructure (MongoDB):**
-   ```bash
-   docker-compose up -d
-   ```
-
-3. **Run the Backend (.NET API):**
-   ```bash
-   cd src/Synq.Api
-   dotnet restore
-   dotnet run
-   ```
-
-4. **Run the Frontend (Angular):**
-   ```bash
-   cd src/Synq.Client
-   npm install
-   ng serve
-   ```
-
-## 🗺 System Evolution (Roadmap)
-
-- [ ] **Phase 1: Core Architecture** - Clean Architecture setup, JWT Auth, basic real-time messaging. *(Current)*
-- [ ] **Phase 2: Reliability & Persistence** - Advanced MongoDB indexing, message pagination, offline synchronization.
-- [ ] **Phase 3: CI/CD Pipeline** - GitHub Actions for automated unit testing (xUnit/Karma) and SonarQube static code analysis.
-- [ ] **Phase 4: Production Readiness** - Dockerization of the API and Client, NGINX reverse proxy setup, and Redis Backplane integration for scale.
+</div>
 
 ---
-*Engineered by [AmirProm](https://github.com/AmirProm).*
+
+## 💡 Overview
+Synq is a high-performance, modern social platform engineered to eliminate digital noise. By focusing on real-time interactions and a clean, minimalist UI, Synq provides a seamless environment for users to connect, share, and engage.
+
+## 🏗 Architecture
+The application leverages a robust, decoupled architecture designed for scalability and low-latency communication.
+
+
+mermaid
+graph LR
+    A[Client - Angular 19] -- WebSocket/SignalR --> B(ASP.NET Core API)
+    B -- Driver/LINQ --> C[(MongoDB)]
+    B -- Identity --> D[Auth System]
+
+
+## ✨ Key Capabilities
+
+| Feature | Technology | Benefit |
+| :--- | :--- | :--- |
+| Real-time Messaging | SignalR | Instantaneous, low-latency communication |
+| Minimalist Feed | Angular Material | Distraction-free, clean UX |
+| Identity | Microsoft Identity | Secure and robust authentication |
+| Data Engine | MongoDB | Highly flexible and scalable data storage |
+
+---
+
+## 🖼 Preview
+*(Add your image links below)*
+
+| Dashboard Overview | Profile Interface |
+| :---: | :---: |
+| ![Dashboard](./screenshots/dashboard.png) | ![Profile](./screenshots/profile.png) |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+Ensure you have the following installed:
+- Node.js: v19+
+- .NET SDK: v10+
+- MongoDB: (Local instance or MongoDB Atlas)
+
+### 2. Backend Setup
+
+bash
+cd API
+dotnet restore
+# Configure your connection string in appsettings.json
+dotnet run
+
+
+### 3. Frontend Setup
+
+bash
+cd client
+npm install
+ng serve --open
+
+
+---
+
+## 🗺 Roadmap
+- [ ] ❤️ Interactions: Implement post likes and threaded comments.
+- [ ] 🔔 Notifications: Real-time push alerts for user activity.
+- [ ] 👥 Networking: Full follow/followers system.
+- [ ] 🌙 Theming: Integrated Dark Mode support.
+
+---
+
+## 🤝 Contributing
+Contributions are what make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add: AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
+
+<p align="center">
+Developed with ❤️ by <b>Amirali Safaee</b>
+</p>
+
+
+***
