@@ -48,7 +48,7 @@ graph LR
 
 | Dashboard Overview | Profile Interface |
 | :---: | :---: |
-| ![Dashboard](./screenshots/dashboard.png) | ![Profile](./screenshots/profile.png) |
+| ![Dashboard](https://github.com/AmirProm/Synq/blob/main/screanshot/Dashboard.png) | ![Profile](./screenshots/profile.png) |
 
 ---
 
